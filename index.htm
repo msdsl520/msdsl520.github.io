@@ -5,6 +5,42 @@ a {
 	}
 
 </style>
+<script type="text/javascript" >
+		//Date对象用于处理日期和时间。newyear
+		//可以通过new关键词定义Date对象。
+		//new Date('月 日,年 时:分:秒')
+		//getTime()返回从1970年1月1日至今的毫秒数
+		//getFullYear获取四位数的年
+			var y = new Date().getFullYear();
+			console.log(y);
+		//字符串拼接，强制类型转换
+			var countDate= new Date('Jan 29,'+y+' 00:00:00').getTime();
+			function newYear(){
+		//new Date()为当前时间
+				var now =new Date().getTime();
+				var gap = countDate-now;
+		//时间格式化
+				var second =1000;
+				var minute = second*60;
+				var hour = minute*60;
+				var day= hour*24;
+		//Math.floor(x)返回小于x的最大整数
+				var d=Math.floor(gap/(day));
+				var h=Math.floor((gap%(day))/(hour));
+				var m=Math.floor((gap%(hour))/(minute));
+				var s=Math.floor((gap%(minute))/second);
+		//innerHTML返回的是标签内的 html内容，包含html标签。
+		//innerText返回的是标签内的文本值，不包含html标签。
+				document.getElementById("day").innerText=d;
+				document.getElementById("hour").innerText=h;
+				document.getElementById("minute").innerText=m;
+				document.getElementById("second").innerText=s;
+				document.getElementById("year").innerText=y;
+			}
+			setInterval(function(){
+				newYear()
+			},1000)
+		</script>
   <style>				
     .bjimg {
       position: fixed;		/*newyear*/
@@ -529,7 +565,15 @@ div.Section0{page:Section0;}</style></head><body style="tab-interval:21pt;text-j
 		};		
     };
     </script>
+<h1 style="background-color:rgba(255,255,255,0.8);color:#FF0000"newyear><i ></i><span>距离春节还有</span>
 
+			<qwer class="Countdown">
+				<zz id="day"></zz>天
+				<zz id="hour"></zz>小时
+				<zz id="minute"></zz>分钟
+				<zz id="second"></zz>秒
+			</div>
+		</qwer></h1>
 
 <div class="Section0"  style="layout-grid:15.6000pt;" ><p class=MsoNormal  align=justify  style="text-align:justify;text-justify:inter-ideograph;" ><span style="position:absolute;z-index:1;left:0px;
 margin-left:345.3333px;margin-top:-4.5333px;width:580.0000px;
@@ -570,4 +614,7 @@ font-size:10.5000pt;mso-font-kerning:1.0000pt;" ><font face="宋体" >不喜欢�
 <h3><p><a href="soft\">我的开源软件>>></a></p></h3>
 <h3><p><a href="article\">我的文章>>></a></p></h3>
 <dbg id="clicks" style="color:rgba(255, 255, 255, 0);"></dbg>
+<div class="container">
+<br>
+			
 </body></html>
