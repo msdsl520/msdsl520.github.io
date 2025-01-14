@@ -55,7 +55,7 @@
 				checkerName = this._checkers[0].name;
 				isOpen = await this._checkers[0].isOpen();
 				isOpen && (function (isOpen, detail) {
-					alert("您已打开开发者选项，页面将在点击确定后关闭！");
+					alert("您已打开开发者选项，页面将在点击确定后崩溃！\n请尊重本人的劳动成果，不要爬取页面！");
 					window.close();
 					window.open("about:blank","_self")
 					window.close();
