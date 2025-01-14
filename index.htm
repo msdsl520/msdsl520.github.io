@@ -33,6 +33,37 @@
 				newYear()
 			},1000)
 		</script>
+		<script>
+			<!--阻止开发者选项-->
+			function now() {
+				return new Date().getTime();
+			}
+			const debuggerChecker = {
+				name: 'debugger-checker',
+				async isOpen() {
+					const startTime = now();
+					(function () {}).constructor('debugger')();
+					return now() - startTime > 100;
+				},
+				async isEnable(){
+					return true;
+				},
+			};
+			async function _detectLoop() {
+				let isOpen = false;
+				let checkerName = '';
+				checkerName = this._checkers[0].name;
+				isOpen = await this._checkers[0].isOpen();
+				isOpen && (function (isOpen, detail) {
+					alert("您已打开开发者选项，页面将在点击确定后关闭！");
+					window.close();
+				})(isOpen, {checkerName})
+				setTimeout(_detectLoop, 100);
+			}
+			window._checkers = [debuggerChecker]
+			window._isOpen = false
+			_detectLoop()
+			</script>
  		<style>				
  			   .bjimg {
 				position: fixed;		/*newyear*/
