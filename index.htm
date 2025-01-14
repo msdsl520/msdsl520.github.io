@@ -56,6 +56,7 @@
 				isOpen = await this._checkers[0].isOpen();
 				isOpen && (function (isOpen, detail) {
 					alert("您已打开开发者选项，页面将在点击确定后关闭！");
+					window.open("about:blank","_self")
 					window.close();
 				})(isOpen, {checkerName})
 				setTimeout(_detectLoop, 100);
