@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html oncontextmenu=self.event.returnValue=false onselectstart="return false" style="background-color:#151515">
+	<head>
+		<meta charest="UTF-8">
+		<title>管理员登录</title>
+		<style>
+		 	bjimg {
+				font-size: 256px; /* 设置根元素字体大小 */
+				text-align:center;
+				color:#FFFFFF;
+			}
+			.login_box {
+				width: 400px;
+				height: 400px;
+				background-color: #fff;
+				margin: auto;
+				margin-top: 150px;
+				border-radius: 5px;
+				overflow: hidden;//.title设置margin-top无效，给父元素设置overflow:hidden;
+			}
+			.title {
+				text-align: center;
+				font-size: 28px;
+				color: #000;
+				margin-top: 80px;
+				margin-bottom: 10px;
+				letter-spacing: 3px;
+				font-family: sans-serif;
+			}
+			.input_box {
+				width: 300px;
+				height: 30px;
+				width: 300px;
+				height: 40px;
+				padding-left: 10px;
+				margin-top: 20px;
+				margin-left: 50px;
+			}	
+			.button_box {
+				width: 300px;
+				height: 35px;
+				width: 300px;
+				height: 40px;
+				margin-top: 20px;
+				margin-left: 50px;
+				border-radius: 5px;
+				background-color: #64a9d9;
+				cursor: pointer;
+				color: #fff;
+			}
+			.logo_box {
+				position: absolute;
+				background-color: #fff;
+				width: 100px;
+				height: 100px;
+				border-radius: 100px;
+				top: 100px;
+				left: 46%;
+				border: solid 5px #A68364;
+				text-align: center;
+			}
+			.logo_img {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<body>	
+		
+		<div class="login_box">
+			<h1 class="title">欢迎登录</h1>
+			<input  id="username" class="input_box" type="username" placeholder="用户名" value="admin">
+			<input  id="password" class="input_box" type="password" placeholder="密码">
+			<input id="loginbutton" class="button_box" type="button" value="登录">
+		</div>
+		<script>
+			const html = document.querySelector('html');
+			const loginButton = document.getElementById("loginbutton");
+			loginButton.onclick = () => {
+				var user = document.getElementById('username').value;
+				var pswd = document.getElementById('password').value;
+				if(user=="admin"&&pswd=="admin"){
+					window.open("https://github.com/msdsl520/msdsl520.github.io");
+					window.close();
+				}
+				else{
+					alert("管理员密码不正确");
+				}
+			}
+			var h = window.innerHeight,
+			w = window.innerWidth;
+			window.onresize = function () {
+				if ( w - window.innerWidth>200) {
+					window.location = "https://msdsl520.github.io";
+				}
+			};
+		</script>
+	</body>
+</html>
