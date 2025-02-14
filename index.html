@@ -43,6 +43,7 @@
 				clicks += 1;
 				document.getElementById("clicks").innerHTML = clicks;
 				if(clicks>=5){
+					alert("你发现了一个小彩蛋");
 					window.location.href='/egg';
 				};		
 			};
@@ -50,7 +51,7 @@
 		<a type="button" onclick="hello()">
 			<img class="ui"width="184"  height="184"  src="pict.png" >
 		</a>
-		<img height="202"  src="welcometext.png" ><br><br>
+		<br>
 		<a class="ui" id="canvas">
 			<h2 class="">个人介绍</h2>
 			<p class="uip">
@@ -64,7 +65,6 @@
 				<br>
 				 &ensp;不喜欢电子游戏，只喜欢C++（原神启动）
 				<br>
-				 &ensp;提示：连续点左上角头像有彩蛋
 			</p>
 		</a>
 		<h2>我的网站</h2>
