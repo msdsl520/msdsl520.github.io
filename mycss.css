@@ -1,0 +1,29 @@
+a {
+	text-decoration: none;
+}
+.ui{
+	border-radius: 50px;
+	background: #ebecef;
+	box-shadow:  10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+//	width: 184px;
+//	height: 184px;
+}
+.uip{
+	border-radius: 20px;
+	background: #ebecef;
+	box-shadow:  10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+//	width: 184px;
+//	height: 184px;
+}
+html{
+	background: #ebecef;
+}
+.hide{
+	display:none;
+}
+.lbord{
+	border-left: 5px solid #dfe2e5;
+}
+.lside{
+	margin-left: 20px;
+}
