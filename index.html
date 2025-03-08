@@ -2,9 +2,18 @@
 	<head>
 		<meta charset="utf-8">
 		<title>茂盛的森林 的个人主页</title>
+		<link rel="stylesheet" type="text/css" href="bugbutton.css">
 		<style>
 			a {
 				text-decoration: none;
+			}
+			bugReportButton {
+				position: fixed;
+				text-align: right;
+				bottom: 0;
+				width: 100%;
+				height: 40px;
+				z-index: 9999;
 			}
 			.ui{
 				border-radius: 50px;
@@ -24,19 +33,72 @@
 				background: #ebecef;
 			}
 		</style>
- 		<style>				
- 			   .bjimg {
-				position: fixed;		/*newyear*/
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: -10;
-				object-fit: cover;
-			}
-   		</style>
 	</head>
 	<body >
+		<bugReportButton><button class="BugButton">
+			<svg
+			xmlns="http://www.w3.org/2000/svg"
+			fill="none"
+			viewBox="0 0 43 42"
+			class="bugsvg"
+			>
+				<path
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M20 7H23C26.866 7 30 10.134 30 14V28.5C30 33.1944 26.1944 37 21.5 37C16.8056 37 13 33.1944 13 28.5V14C13 10.134 16.134 7 20 7Z"
+					></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M18 2V7"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M25 2V7"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+			      stroke="#cfcfcf"
+					d="M31 22H41"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M2 22H12"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M12.5785 15.2681C3.5016 15.2684 4.99951 12.0004 5 4"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M12.3834 29.3877C3.20782 29.3874 4.72202 32.4736 4.72252 40.0291"
+				></path>
+				<path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M30.0003 14.8974C39.0545 15.553 37.7958 12.1852 38.3718 4.20521"
+				></path>
+			    <path
+					stroke-linecap="round"
+					stroke-width="4"
+					stroke="#cfcfcf"
+					d="M29.9944 29.7379C39.147 29.1188 37.8746 32.2993 38.4568 39.8355"
+				></path>
+			</svg>
+			<span class="tooltip">Bug Report</span>
+		</button></bugReportButton>
+
 		<script type="text/javascript">
 			var clicks = 0;
 			function hello() {
