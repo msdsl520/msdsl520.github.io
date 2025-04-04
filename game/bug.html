@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记忆力测试游戏</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #4b0082, #6a0dad, #222);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        h1 {
+            background: linear-gradient(to right, #a5b4fc, #fbcfe8, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        #timer {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 1.5rem;
+            background-color: rgba(165, 180, 252, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(5, 110px);
+            grid-template-rows: repeat(5, 110px);
+            gap: 10px;
+        }
+
+        .card {
+            width: 110px;
+            height: 110px;
+            perspective: 1000px;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: transform 0.6s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card:hover {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+
+        .card-front {
+            background-size: cover;
+            transform: rotateY(180deg);
+        }
+
+        .card-back {
+            background-color: #382a52;
+        }
+
+        .matched {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+        }
+
+        #result {
+            font-size: 20px;
+            color: white;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(106, 13, 173, 0.7);
+            color: white;
+            cursor: pointer;
+            width: 240px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>记忆力测试游戏</h1>
+    <div id="timer">60 秒</div>
+    <div id="game-board"></div>
+    <div id="result"></div>
+    <button id="restart-button">开始游戏</button>
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const timer = document.getElementById('timer');
+        const result = document.getElementById('result');
+        const restartButton = document.getElementById('restart-button');
+
+        const photos = [
+            'https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/13f9ea0cccf7d214a1164e8ef4d1350d_1741773629464734225.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773309629&x-signature=hFSc3eF0B5%2BxrXgmaqPcuvJ%2FcMw%3D',
+            'https://p9-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/ea4ffebe6e55e0cd24f52f8174c736a0_1741773635605132415.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773309635&x-signature=A%2BurWIkTZt7D4AxokkGrYqLB%2BBw%3D',
+            'https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/3884d96c52f4307d8ee35164b6917acb_1741773641327011703.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773309641&x-signature=wM7m1%2Fw1JzsNINhS%2BiSOLVme%2FIA%3D',
+            'https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/image_generation/077c37e8eae14fa5054881ed2706769f_1741773642128909041.png~tplv-a9rns2rl98-image.png?rk3s=25bff839&x-expires=1773309642&x-signature=r29Ds2hd5Kd3ZGW0R7iI8Q3eFIw%3D',
+            'https://picsum.photos/200/300' // 新增一张示例图片
+        ];
+
+        let cards = [];
+        let flippedCards = [];
+        let matchedCards = [];
+        let timeLeft = 60;
+        let timerInterval;
+        let gameStarted = false;
+
+        function createCards() {
+            const cardData = [];
+            for (let i = 0; i < 5; i++) {
+                for (let j = 0; j < 5; j++) {
+                    cardData.push({ id: i * 5 + j, photo: photos[Math.floor(i / 1)] });
+                }
+            }
+            cardData.sort(() => Math.random() - 0.5);
+
+            cards = cardData.map(data => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                const cardInner = document.createElement('div');
+                cardInner.classList.add('card-inner');
+                const cardFront = document.createElement('div');
+                cardFront.classList.add('card-front');
+                cardFront.style.backgroundImage = `url('${data.photo}')`;
+                const cardBack = document.createElement('div');
+                cardBack.classList.add('card-back');
+                cardInner.appendChild(cardFront);
+                cardInner.appendChild(cardBack);
+                card.appendChild(cardInner);
+                card.dataset.id = data.id;
+                card.dataset.photo = data.photo;
+                card.addEventListener('click', function () {
+                    if (!gameStarted) {
+                        startGame();
+                    } else {
+                        handleCardClick(this);
+                    }
+                });
+                return card;
+            });
+
+            gameBoard.innerHTML = '';
+            cards.forEach(card => gameBoard.appendChild(card));
+        }
+
+        function startGame() {
+            gameStarted = true;
+            createCards();
+            timeLeft = 60;
+            timer.textContent = timeLeft + ' 秒';
+            result.textContent = '';
+            flippedCards = [];
+            matchedCards = [];
+            disableCards();
+            showAllCards();
+            setTimeout(() => {
+                hideAllCards();
+                enableCards();
+                startTimer();
+            }, 1000);
+            restartButton.textContent = '重新开始';
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timer.textContent = timeLeft + ' 秒';
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+                    endGame(false);
+                }
+            }, 1000);
+        }
+
+        function handleCardClick(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+                card.classList.add('flipped');
+                flippedCards.push(card);
+                if (flippedCards.length === 2) {
+                    disableCards();
+                    setTimeout(() => {
+                        if (flippedCards[0].dataset.photo === flippedCards[1].dataset.photo) {
+                            flippedCards.forEach(c => {
+                                c.classList.add('matched');
+                                matchedCards.push(c);
+                            });
+                            if (matchedCards.length === 25) {
+                                clearInterval(timerInterval);
+                                endGame(true);
+                            }
+                        } else {
+                            flippedCards.forEach(c => c.classList.remove('flipped'));
+                        }
+                        flippedCards = [];
+                        enableCards();
+                    }, 1000);
+                }
+            }
+        }
+
+        function showAllCards() {
+            cards.forEach(card => card.classList.add('flipped'));
+        }
+
+        function hideAllCards() {
+            cards.forEach(card => card.classList.remove('flipped'));
+        }
+
+        function disableCards() {
+            cards.forEach(card => card.style.pointerEvents = 'none');
+        }
+
+        function enableCards() {
+            cards.forEach(card => {
+                if (!card.classList.contains('matched')) {
+                    card.style.pointerEvents = 'auto';
+                }
+            });
+        }
+
+        function endGame(isWin) {
+            disableCards();
+            if (isWin) {
+                result.textContent = '闯关成功！';
+            } else {
+                result.textContent = '闯关失败！';
+            }
+            gameStarted = false;
+        }
+
+        restartButton.addEventListener('click', function () {
+            gameStarted = false;
+            clearInterval(timerInterval);
+            createCards();
+            timeLeft = 60;
+            timer.textContent = timeLeft + ' 秒';
+            result.textContent = '';
+            flippedCards = [];
+            matchedCards = [];
+            restartButton.textContent = '开始游戏';
+        });
+
+        createCards();
+    </script>
+</body>
+
+</html>    
