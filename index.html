@@ -1,166 +1,181 @@
 <!DOCTYPE html>
 <html oncontextmenu="self.event.returnValue=false" onselectstart="return false">
-	<head>
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>茂盛的森林 的个人主页</title>
-	    <style>
-	        body {
-	            font-family: Arial, sans-serif;
-	            line-height: 1.6;
-	            margin: 0;
-	            padding: 20px;
-	            background: #ebecef;
-	            color: #333;
-	        }
-	        a {
-	            text-decoration: none;
-	            color: #0066cc;
-	        }
-	        a:hover {
-	            color:#00FFFF;
-	        }
-	        
-	        h2, h3 {
-	            color: #222;
-	        }
-	        .ui, .uip {
-	            border-radius: 20px;
-	            background: #ebecef;
-	            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
-	            padding: 15px;
-	            margin-bottom: 20px;
-	        }
-	        .ui {
-	            border-radius: 20px;
-	        }
-	        .ui img {
-	            max-width: 100%;
-	            height: auto;
-	            border-radius: 15px;
-	        }
-	        .container {
-	            max-width: 1200px;
-	            margin: 0 auto;
-	        }
-	        .nav-links {
-	            display: flex;
-	            flex-wrap: wrap;
-	            gap: 10px;
-	        }
-	        .nav-links a:hover{
-			color: #0066cc;
-		}
-	        .nav-links a {
-	            padding: 8px 15px;
-	            border-radius: 10px;
-	            background: #e0e0e0;
-	            transition: background 0.3s;
-	        }
-	        .nav-links a:hover {
-	            background: #d0d0d0;
-	            text-decoration: none;
-	        }
-	        @media (min-width: 768px) {
-	            body {
-	                padding: 30px;
-	            }
-	            
-	            .ui, .uip {
-	                padding: 20px;
-	            }
-	            
-	            .flex-container {
-	                display: flex;
-	                gap: 20px;
-	            }
-	            
-	            .flex-container .ui, .flex-container .uip {
-	                flex: 1;
-	            }
-	        }
-	        
-	        @media (min-width: 1024px) {
-	            body {
-	                padding: 40px;
-	            }
-	            
-	            .container {
-	                display: grid;
-	                grid-template-columns: 3fr 1fr;
-	                gap: 30px;
-	            }
-	            
-	            .main-content {
-	                grid-column: 1;
-	            }
-	            
-	            .sidebar {
-	                grid-column: 2;
-	            }
-	        }
-		.imgui{
-			border-radius: 50px;
-			background: #ebecef;
-			box-shadow:  10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
-		//	width: 184px;
-		//	height: 184px;
-		}	
-	    </style>
-	</head>
-	<body>
-	    <div class="container">
-	        <header>
-	            <a type="button" onclick="hello()">
-	                <div class="" style="text-align: center;">
-	                    <img class="imgui"width="184" height="184" src="pict.png">
-	                </div>
-	            </a>
-	        </header>
-	        
-	        <main class="main-content">
-	            <div class="ui">
-	                <h2>个人介绍</h2>
-	                <p >
-	                    &ensp;初二学生，喜欢数学和计算机（以及干jiyu）（讨厌语文和体育），没事捣鼓亿些小东西。
-	                    <br>
-	                    &ensp;来自山东鲁B（鲁A济南车，鲁B青岛的，鲁C淄博、鲁D枣庄，东营是鲁E……）
-	                    <br>
-	                    &ensp;无聊的时候码几行代码，搞一搞Arduino（一种单片机）……
-	                    <br>
-	                    &ensp;顺便说一句，OIer的世界除了代码没有别的
-	                    <br>
-	                    &ensp;不喜欢电子游戏，只喜欢C++（原神启动）
-	                    <br>
-	                </p>
-	            </div>
-	            
-	            <h2>我的网站</h2>
-	            <div class="ui">
-	                <a href="helloworld\index.html">&ensp;&ensp;&ensp;hello world（我的第一个页面）</a><br>
-	                <a href="biye\index.html">&ensp;&ensp;&ensp;我的小学毕业纪念册</a>
-	            </div>
-	            
-	                <h3 class="nav-links"><a href="soft\">我的开源软件</a></h3>
-	                <h3 class="nav-links"><a href="article\">我的文章</a></h3>
-	        </main>
-	        
-	        <aside class="sidebar">
-	            <!--TODO 完善侧边拦-->
-	        </aside>
-	    </div>
-	    <script type="text/javascript">
-	        var clicks = 0;
-	        function hello() {
-	            clicks += 1;
-	            document.getElementById("clicks").innerHTML = clicks;
-	            if(clicks >= 5){
-	                alert("你发现了一个小彩蛋");
-	                window.location.href='/egg';
-	            };        
-	        };
-	    </script>
-	    <img id="clicks" style="color:rgba(255, 255, 255, 0);"></img>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茂盛的森林 的个人主页</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #ebecef;
+            color: #333;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        
+        a:hover {
+            color:#00FFFF;
+        }
+        
+        h2, h3 {
+            color: #222;
+        }
+        
+        /* 卡片样式 */
+        .ui, .uip {
+            border-radius: 20px;
+            background: #ebecef;
+            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .ui {
+            border-radius: 20px;
+        }
+        
+        /* 图像样式 */
+        .ui img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        
+        /* 响应式布局 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 导航链接样式 */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-links a:hover{
+		color: #0066cc;
+	}
+        .nav-links a {
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: #e0e0e0;
+            transition: background 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: #d0d0d0;
+            text-decoration: none;
+        }
+        
+        /* 响应式调整 */
+        @media (min-width: 768px) {
+            body {
+                padding: 30px;
+            }
+            
+            .ui, .uip {
+                padding: 20px;
+            }
+            
+            .flex-container {
+                display: flex;
+                gap: 20px;
+            }
+            
+            .flex-container .ui, .flex-container .uip {
+                flex: 1;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            body {
+                padding: 40px;
+            }
+            
+            .container {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                gap: 30px;
+            }
+            
+            .main-content {
+                grid-column: 1;
+            }
+            
+            .sidebar {
+                grid-column: 2;
+            }
+        }
+	.imgui{
+		border-radius: 50px;
+		background: #ebecef;
+		box-shadow:  10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+	//	width: 184px;
+	//	height: 184px;
+	}	
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a type="button" onclick="hello()">
+                <div class="" style="text-align: center;">
+                    <img class="imgui"width="184" height="184" src="pict.png">
+                </div>
+            </a>
+        </header>
+        
+        <main class="main-content">
+            <div class="ui">
+                <h2>个人介绍</h2>
+                <p >
+                    &ensp;初二学生，来自山东鲁B，喜欢数学和计算机，没事捣鼓亿些小东西。
+                    <br>
+                    &ensp;无聊的时候码几行代码，搞一搞HTML，写几篇文章……
+                    <br>
+                    &ensp;顺便说一句，Coder的世界除了代码没有别的
+                    <br>
+                    &ensp;不喜欢电子游戏，只喜欢C++及各类编程语言
+                    <br>
+			&ensp;（据说程序员一般找不着女朋友，不知真的假的）
+                </p>
+            </div>
+            
+            <!--h2>我的网站</h2>
+            <div class="ui">
+                <a href="helloworld\index.html">&ensp;&ensp;&ensp;hello world（我的第一个页面）</a><br>
+                <a href="biye\index.html">&ensp;&ensp;&ensp;我的小学毕业纪念册</a>
+            </div-->
+            
+                <h3 class="nav-links"><a href="soft\">我的开源软件</a></h3>
+                <h3 class="nav-links"><a href="article\">我的文章</a></h3>
+        </main>
+        
+        <aside class="sidebar">
+            <!-- TODO:侧边栏内容 -->
+        </aside>
+    </div>
+    
+    <script type="text/javascript">
+        var clicks = 0;
+        function hello() {
+            clicks += 1;
+            document.getElementById("clicks").innerHTML = clicks;
+            if(clicks >= 5){
+                alert("你发现了一个小彩蛋");
+                window.location.href='/egg';
+            };        
+        };
+    </script>
+    <img id="clicks" style="color:rgba(255, 255, 255, 0);"></img>
+</body>
 </html>
     
