@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>茂盛的森林 的个人主页</title>
     <style>
-        /* 基础样式 */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -14,21 +13,13 @@
             background: #ebecef;
             color: #333;
         }
-        
         a {
             text-decoration: none;
             color: #0066cc;
         }
-        
-        a:hover {
-            color:#00FFFF;
-        }
-        
         h2, h3 {
             color: #222;
         }
-        
-        /* 卡片样式 */
         .ui, .uip {
             border-radius: 20px;
             background: #ebecef;
@@ -36,41 +27,39 @@
             padding: 15px;
             margin-bottom: 20px;
         }
-        
         .ui {
             border-radius: 20px;
         }
-        
-        /* 图像样式 */
         .ui img {
             max-width: 100%;
             height: auto;
             border-radius: 15px;
         }
         
-        /* 响应式布局 */
+        /*响应*/
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
-        /* 导航链接样式 */
         .nav-links {
+	    width:5rem;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 10px;
+ 	    border-radius: 20px;
+            background: #ebecef;
+            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+            margin-bottom: 20px;
         }
         .nav-links a:hover{
 		color: #0066cc;
 	}
-        .nav-links a {
+        .nav-links  {
             padding: 8px 15px;
-            border-radius: 10px;
-            background: #e0e0e0;
             transition: background 0.3s;
         }
         
-        .nav-links a:hover {
+        .nav-links:hover {
             background: #d0d0d0;
             text-decoration: none;
         }
@@ -145,18 +134,16 @@
                     <br>
                     &ensp;不喜欢电子游戏，只喜欢C++及各类编程语言
                     <br>
-			&ensp;（据说程序员一般找不着女朋友，不知真的假的）
+			（据说程序员一般找不着女朋友，不知真的假的）
                 </p>
             </div>
-            
-            <!--h2>我的网站</h2>
-            <div class="ui">
-                <a href="helloworld\index.html">&ensp;&ensp;&ensp;hello world（我的第一个页面）</a><br>
-                <a href="biye\index.html">&ensp;&ensp;&ensp;我的小学毕业纪念册</a>
-            </div-->
-            
-                <h3 class="nav-links"><a href="soft\">我的开源软件</a></h3>
-                <h3 class="nav-links"><a href="article\">我的文章</a></h3>
+
+            <h3>
+                <div>
+			<a href="soft\"class="nav-links">我的软件</a>
+            		  <a href="article\"class="nav-links">我的文章</a>
+		</div>
+		</h3>
         </main>
         
         <aside class="sidebar">
