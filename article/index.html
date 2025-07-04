@@ -1,26 +1,27 @@
-<html oncontextmenu=self.event.returnValue=false onselectstart="return false">
-	<head>
+
+<!-- saved from url=(0035)https://msdsl520.github.io/article/ -->
+<html oncontextmenu="self.event.returnValue=false" onselectstart="return false"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<style>
 			a:link, a:visited, a:hover, a:active {
 				color: #4B95FF; 
 				text-decoration: none; 
-				 transition: all 0.3s ease;
+				 transition: all 0.1s ease;
 			}
-			.article:hover{
-				 position: relative;
-				  background: rgba(255, 255, 255,0.6);
-				  backdrop-filter: blur(2px) saturate(150%);
-				  border-radius: 2rem;
-				  padding: 0.5rem;
-				  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
+			/*.article:hover{
+			//	 position: relative;
+				//  background: rgba(255, 255, 255,0.6);
+			//	  backdrop-filter: blur(2px) saturate(150%);
+			//	  border-radius: 2rem;
+				//  padding: 0.5rem;
+		//		  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
 				font-size:17.5;
 			}
 			.article:active{
 				background: rgba(255, 255, 255, 0.2);
 				font-size:17;
-			}
+			}*/
 			.glass {
 				  position: relative;
 				  background: rgba(255, 255, 255, 0.04);
@@ -50,29 +51,11 @@
 		  		pointer-events: none;
 			}	
 			.mainglass {
-				  position: relative;
-				  background: rgba(255, 255, 255, 0.04);
-				  backdrop-filter: blur(2px) saturate(200%);
-				  border: solid rgba(255, 255, 255, 0.5);
-				  border-radius: 2rem;
-				  padding: 1.25rem;
-				  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
-				width: 600px;
-			}
-			.mainglass::after {
-				  content: '';
-				  position: absolute;
-				  top: 0;
-				  left: 0;
-				  width: 100%;
-				  height: 100%;
-				  background: rgba(255, 255, 255, 0.1);
-				  border-radius: 2rem;
-				  backdrop-filter: blur(1px);
-		  		box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 0.5), inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
-		  		opacity: 0.6;
-		  		z-index: -1;
-		  		filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+				  border-radius: 20px;
+       				     background: #ebecef;
+      			      box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
+       			     padding: 15px;
+      			      margin-bottom: 20px;
 			}
 			.glass:hover {
 				  background: rgba(255, 255, 255, 0.2);
@@ -107,42 +90,70 @@
       		  	}	
 
 		</style>
-		<meta charset="utf-8">
+		
 		<title>我的文章</title>
 		
 	</head>
 	<body>
-	<a href="https://blog.csdn.net/smpdx" >
+
+			<button class="glass" style="height:4rem;position: fixed;height: 4rem; left: 22.5rem; z-index: 9999;"id="copyInput">
+				<svg class=""style="width:1.5rem;height:1.5rem;">
+        				<path
+        				  d="M5 3a1 1 0 000 2c5.523 0 10 4.477 10 10a1 1 0 102 0C17 8.373 11.627 3 5 3z"
+     					></path>
+      					<path
+    					      d="M4 9a1 1 0 011-1 7 7 0 017 7 1 1 0 11-2 0 5 5 0 00-5-5 1 1 0 01-1-1zM3 15a2 2 0 114 0 2 2 0 01-4 0z"
+   					></path>
+      				</svg>
+				
+			</button>
+	<a href="https://blog.csdn.net/smpdx">
 			<div style=" position: fixed; left: 27rem; height: 4rem; 	z-index: 9999;">
-				<button class="glass"style="width:11.5rem;height:4rem;">
+				<button class="glass" style="width:11.5rem;height:4rem;text-align: left;">
 				  <b style="font-size:16;display: flex;flex-direction: row; align-items: center;width:9rem;text-align:center;">前往我的CSDN➡️</b>
 				</button>
  			</div>
 		</a>
 		<div>
-			<h1 style="font-size:32;">&ensp;我的文章</h1>
+			<h1 style="font-size:32;"> 我的文章</h1>
 			
 		</div>
-		<div class="mainglass"><br>
-			<div class="tit">&ensp;网络安全</div>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145531785" >&ensp;网络安全：数字世界的隐形铠甲</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145643160" >&ensp;加密算法：信息安全的基石</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/147184655" >&ensp;数字证书：网络中的“身份证”</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145788341" >&ensp;HTTPS如何保证安全，又真的安全吗？</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145150388" >&ensp;网络安全——WinRAR自解压木马的原理与防范</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144779128" >&ensp;EXE秒变“PDF”？文件名欺骗是如何“改变”文件的后缀的</a><br>
-			<div class="tit">&ensp;Web开发</div>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144921038" >&ensp;Github Pages建站指南</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/148047554" >&ensp;解锁HTML适配密码：让网页在不同设备自由“变身”</a><br>
-			<div class="tit">&ensp;电脑科普</div>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144622284" >&ensp;对U盘扩容的一次分析及实践</a><br>
-			<div class="tit">&ensp;算法设计</div>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144778851" >&ensp;01背包（枚举及动态规划）</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144622512" >&ensp;陶陶摘苹果 题解（洛谷P1046)</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144780470" >&ensp;多重背包算法（动态规划）</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144921194" >&ensp;P11227 扑克牌 C++题解（打表）</a><br>
-					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144950572" >&ensp;P1008 三连击题解（枚举）</a><br>
+		<div class="mainglass" style="width:36rem;"><br>
+			<div class="tit"> 网络安全</div>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145531785"> 网络安全：数字世界的隐形铠甲</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145643160"> 加密算法：信息安全的基石</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/147184655"> 数字证书：网络中的“身份证”</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145788341"> HTTPS如何保证安全，又真的安全吗？</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/145150388"> 网络安全——WinRAR自解压木马的原理与防范</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144779128"> EXE秒变“PDF”？文件名欺骗是如何“改变”文件的后缀的</a><br>
+			<div class="tit"> Web开发</div>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144921038"> Github Pages建站指南</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/148047554"> 解锁HTML适配密码：让网页在不同设备自由“变身”</a><br>
+			<div class="tit"> 电脑科普</div>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144622284"> 对U盘扩容的一次分析及实践</a><br>
+			<div class="tit"> 算法设计</div>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144778851"> 01背包（枚举及动态规划）</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144622512"> 陶陶摘苹果 题解（洛谷P1046)</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144780470"> 多重背包算法（动态规划）</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144921194"> P11227 扑克牌 C++题解（打表）</a><br>
+					<a class="article" href="https://blog.csdn.net/smpdx/article/details/144950572"> P1008 三连击题解（枚举）</a><br>
 				<br>
 		</div>
-	</body>
+	
+</body>
+<input type="text" value="https://rss.csdn.net/smpdx/rss/map" id="myInput"style="display:none;">
+<script src="https://cdn.staticfile.org/clipboard.js/2.0.4/clipboard.min.js"></script>
+<script>
+
+new ClipboardJS('#copyInput', {
+    text: function(trigger) {
+        return document.getElementById("myInput").value;
+    }
+}).on('success', function(e) {
+   alert("复制成功！！！");
+   e.clearSelection();
+}).on('error', function(e) {
+    
+});
+</script>
 </html>
