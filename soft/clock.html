@@ -1,144 +1,201 @@
 <!DOCTYPE html>
-<html   oncontextmenu=self.event.returnValue=false onselectstart="return false"  style="background-color:#151515">
-	<head>
-		<style>
-			bjimg {
-				font-size: 256px; /* 设置根元素字体大小 */
-				text-align:center;
-				color:#FFFFFF;
-			}
-			@media (max-width: 1100px) {
-				bjimg {
-					font-size: 200px;
-				}
-			}			
-			@media (max-width: 800px) {
-				bjimg {
-					font-size: 128px;
-				}
-			}
-			@media (max-width: 600px) {
-	 		       bjimg {
-					font-size: 64px;
-				}
-  		    	}	
-			@media (max-width: 150px) {
-			        bjimg {
-					font-size: 32px;
-				}
-			}
-			footer {
-				position: fixed;
-				left: 0;
-				bottom: 0;
-				width: 100%;
-				height: 40px;
-				background-color: #151515;
-				z-index: 9999;
-			}
-			button {
-				background-color: #1795bb;
-				border-radius: 12px;
-				border: none;
-				color: white;
-				padding: 5px 16px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 16px;
-				margin: 4px 2px;
-				transition-duration: 0.5s;
-				cursor: pointer;
-			}
-		</style>
-		<meta charset="UTF-8">
-		<title>网页版时钟</title>
-		<script>
-			function showTime() {
-			var date = new Date();
-			var time = date.toLocaleTimeString();
-				document.getElementById("time").innerHTML = time;
-			}
-			setInterval(showTime, 1000);
-		</script>
-	</head>
-	<body onload="showTime()">
-		<bjimg class=".bjimg">
-			<div id="time"></div>
-		</bjimg>
-		<div>
-		<footer>
-			<center>
-				<button id="fullscreenbtn">全屏</button>
-			</center>
-		</footer>
-		</div>
-		<script>
-			const html = document.querySelector('html');
-			const fullScreenBtn = document.getElementById('fullscreenbtn');
-			fullScreenBtn.onclick = () => {
-				let full=document.fullscreenElement
-				if(!full){
-					html.requestFullscreen().then(() => {
-						fullscreenbtn.innerText = "全屏"
-						fullScreenBtn.style.backgroundColor = 'green';
-					}).catch(() => {
-						console.log('进入全屏失败');
-					});
-				}
-				else{
-					fullScreenBtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'red';
-					document.exitFullscreen()
-				}
-			}
-		</script>
-		<script>
-			document.addEventListener("fullscreenchange", function() {
-				let full=document.fullscreenElement;
-				if(full){
-					fullscreenbtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'green';
-				}
-				else{
-					fullScreenBtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'red';
-				}
-			});
-			document.addEventListener("mozfullscreenchange", function() {
-				let full=document.fullscreenElement;
-				if(full){
-					fullscreenbtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'green';
-				}
-				else{
-					fullScreenBtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'red';
-				}
-			});
-			document.addEventListener("webkitfullscreenchange", function() {
-				let full=document.fullscreenElement;
-				if(full){
-					fullscreenbtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'green';	
-				}
-				else{
-					fullScreenBtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'red';
-				}
-	
-			});
-			document.addEventListener("msfullscreenchange", function() {
-				let full=document.fullscreenElement;
-				if(full){
-					fullscreenbtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'green';
-				}
-				else{
-					fullScreenBtn.innerText = "全屏"
-					fullScreenBtn.style.backgroundColor = 'red';
-				}
-			});
-		</script>
-	</body>
+<html oncontextmenu=self.event.returnValue=false onselectstart="return false">
+    <head>
+        <!--图标库-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <style>
+            html{
+                transition-duration: 0.5s;
+            }
+            .bjimg {
+                font-size: 256px;
+                text-align:center;
+                transition-duration: 0.5s;
+            }
+            //适配设备
+            @media (max-width: 1100px) {
+               .bjimg {
+                    font-size: 200px;
+                }
+            }
+            @media (max-width: 800px) {
+               .bjimg {
+                    font-size: 128px;
+                }
+            }
+            @media (max-width: 600px) {
+               .bjimg {
+                    font-size: 64px;
+                }
+            }
+            @media (max-width: 150px) {
+               .bjimg {
+                    font-size: 32px;
+                }
+            }
+            button {
+                border-radius: 12px;
+                border: none;
+                padding: 14px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 4px;
+                transition-duration: 0.5s;
+                cursor: pointer;
+                position: fixed;
+            }
+            #fullscreenbtn {
+                top: 10px;
+                right: 10px;
+            }
+            #modebtn {
+                top: 10px;
+                right: 70px;
+            }
+
+            /* 暗色和亮色 */
+            .dark-mode {
+                background-color: #000000;
+                color: #FFFFFF;
+            }
+            .light-mode {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+
+            /* 暗色 */
+            .dark-mode button {
+                background-color: #333333;
+                color: white;
+            }
+            /* 亮色 */
+            .light-mode button {
+                background-color: #cccccc;
+                color: #333333;
+            }
+
+            /* 检测系统深色*/
+            @media (prefers-color-scheme: dark) {
+                .system-dark-mode .dark-mode {
+                    display: block;
+                }
+                .system-dark-mode .light-mode {
+                    display: none;
+                }
+            }
+            @media (prefers-color-scheme: light) {
+                .system-dark-mode .light-mode {
+                    display: block;
+                }
+                .system-dark-mode .dark-mode {
+                    display: none;
+                }
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>网页版时钟</title>
+        <script>
+            function showTime() {
+                var date = new Date();
+                var time = date.toLocaleTimeString();
+                document.getElementById("time").innerHTML = time;
+            }
+            setInterval(showTime, 1000);
+
+            // 检测系统深色
+            function detectSystemDarkMode() {
+                const html = document.documentElement;
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                html.classList.add('system-dark-mode');
+                if (prefersDark) {
+                    html.classList.add('dark-mode');
+                    html.classList.remove('light-mode');
+                    document.getElementById('modebtn').innerHTML = '<i class="fa-solid fa-moon"></i>';
+                } else {
+                    html.classList.add('light-mode');
+                    html.classList.remove('dark-mode');
+                    document.getElementById('modebtn').innerHTML = '<i class="fa-solid fa-sun"></i>';
+                }
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (e.matches) {
+                        enableDarkMode();
+                    } else {
+                        enableLightMode();
+                    }
+                });
+            }
+            //夜间
+            function enableDarkMode() {
+                const html = document.documentElement;
+                const bjimg = document.querySelector('.bjimg');
+                const modeBtn = document.getElementById('modebtn');
+                html.classList.remove('light-mode');
+                html.classList.add('dark-mode');
+                bjimg.classList.remove('light-mode');
+                bjimg.classList.add('dark-mode');
+                modeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            }
+            //亮色
+            function enableLightMode() {
+                const html = document.documentElement;
+                const bjimg = document.querySelector('.bjimg');
+                const modeBtn = document.getElementById('modebtn');
+                html.classList.remove('dark-mode');
+                html.classList.add('light-mode');
+                bjimg.classList.remove('dark-mode');
+                bjimg.classList.add('light-mode');
+                modeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+            //用户手动奇幻
+            function toggleMode() {
+                const html = document.documentElement;
+                const isDarkMode = html.classList.contains('dark-mode');
+                html.classList.remove('system-dark-mode');
+                if (isDarkMode) {
+                    enableLightMode();
+                } else {
+                    enableDarkMode();
+                }
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                detectSystemDarkMode();
+                showTime();
+            });
+        </script>
+    </head>
+    <body onload="showTime()">
+        <div class="bjimg">
+            <div id="time"></div>
+        </div>
+        <button id="fullscreenbtn"><i class="fa-solid fa-expand"></i></button>
+        <button id="modebtn" onclick="toggleMode()"><i class="fa-solid fa-moon"></i></button>
+        <script>
+            const html = document.querySelector('html');
+            const fullScreenBtn = document.getElementById('fullscreenbtn');
+            fullScreenBtn.onclick = () => {
+                let full = document.fullscreenElement;
+                if (!full) {
+                    html.requestFullscreen().then(() => {
+                        fullScreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+                    }).catch(() => {
+                    });
+                } else {
+                    fullScreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+                    document.exitFullscreen();
+                }
+            }
+        </script>
+        <script>
+            document.addEventListener("fullscreenchange", function() {
+                let full = document.fullscreenElement;
+                if (full) {
+                    fullScreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+                } else {
+                    fullScreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+                }
+            });
+        </script>
+    </body>
 </html>
