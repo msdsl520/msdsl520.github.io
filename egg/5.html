@@ -2,45 +2,7 @@
 <html>
 <head>
 <meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
-<style>
-	.glass {
-		  position: relative;
-		  background: rgba(255, 255, 255, 0.04);
-		  backdrop-filter: blur(2px) saturate(200%);
-		  border: solid rgba(255, 255, 255, 0.5);
-		  border-radius: 2rem;
-		  padding: 1.25rem;
-		  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 4px 20px rgba(255, 255, 255, 0.3);
-		  transition: all 0.3s ease;
-		position: absolute;
-		z-index: 9999;
-	}
-	.glass::after {
-		  content: '';
-		  position: absolute;
-		  top: 0;
-		  left: 0;
-		  width: 100%;
-		  height: 100%;
-		  background: rgba(255, 255, 255, 0.1);
-		  border-radius: 2rem;
-		  backdrop-filter: blur(1px);
-  		box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 0.5), inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
-  		opacity: 0.6;
-  		z-index: -1;
-  		filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
-  		pointer-events: none;
-	}	
-	.glass:hover {
-		  background: rgba(255, 255, 255, 0.2);
-		  transform: scale(1.05);
-	}
-	.glass:active {
-		  background: rgba(255, 255, 255, 0.2);
-		  transform: scale(0.9);
-	}
 
-</style>
 <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 .mac-os-11 { --title-bar-height:28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -238,6 +200,87 @@ mark .md-meta { color: rgb(0, 0, 0); }
 .typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
 .md-inline-math-container mjx-container { zoom: 0.95; }
 mjx-container { break-inside: avoid; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
 
 
 :root {
@@ -623,58 +666,19 @@ header, .context-menu, .megamenu-content, footer{
     background-color: #f5f8fa;
     background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
 }
-.moonos {
-font-family: "Segoe Script","Segoe Print";
-}
 
 
-</style>
-<title>草莓味的心动</title>
+
+</style><title>彩蛋</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
-	<div id="draggable" style=" position: fixed; right: 15rem; bottom: 5rem; 	z-index: 9999;">
-		<button class="glass"style="width:10.5rem;height:4rem;">
-		  <b style="font-size:16;display: flex;flex-direction: row; align-items: center;width:9rem;text-align:center;"><text class="moonos">MoonOS AI</text>生成</b>
-		</button>
-	</div>
-<div id='write'  class=''><h1 id='草莓味的心动'><span>草莓味的心动</span></h1><p><span>在阳光洒满的校园里，苏瑶抱着书本，急匆匆地赶去下一堂课。转角处，她与一个人撞了个满怀，书本散落一地。</span></p><p><span>“对不起，我没看路。”苏瑶赶忙蹲下捡书，抬头却撞进了林宇深邃又带着歉意的眼眸。林宇是学校篮球队的主力，帅气阳光，球技精湛，在学校里可是不少女生心中的男神。此刻，他一边说着抱歉，一边快速帮苏瑶捡起书本，手指不经意间触碰到苏瑶的手，苏瑶的脸“唰”地一下红到了耳根。</span></p><p><span>从那之后，林宇总会有意无意地出现在苏瑶身边。图书馆里，苏瑶正专注地看着书，一抬头，发现林宇就坐在不远处，冲她露出一个灿烂的笑容，阳光洒在他身上，仿佛给他镀上了一层金边。</span></p><p><span>学校举办运动会，苏瑶报名参加了女子八百米。赛场上，她跑得气喘吁吁，脚步也越来越沉重。就在她快要坚持不下去的时候，听到了林宇响亮的加油声：“苏瑶，你可以的，加油！”那声音仿佛带着魔力，给了苏瑶力量，她奋力冲刺，最终跑过了终点线。林宇第一时间冲上前，递上一瓶水，眼里满是关切与赞许：“你超棒的！”</span></p><p><span>渐渐地，两人的关系越来越亲密。一个午后，学校的花园里开满了不知名的小花。林宇紧张地看着苏瑶，手心里都是汗，他鼓起勇气说：“苏瑶，我……我喜欢你很久了，从我们第一次撞到开始，我就发现自己的目光总是不自觉地追寻你。你愿意做我的女朋友吗？”苏瑶看着林宇真诚的眼睛，心跳如鼓，轻轻地点了点头。</span></p><p><span>林宇兴奋地牵起苏瑶的手，两人漫步在校园的小道上。微风拂过，带来阵阵花香。他们偶尔相视而笑，眼中满是对彼此的眷恋。在这个充满青春气息的校园里，他们的爱情如同草莓味的糖果，甜蜜又美好，每一个瞬间都仿佛被阳光定格，成为他们记忆中最珍贵的画面。</span></p></div></div>
-<script>
-var isMouseDown = false;
-var initX, initY, mouseX, mouseY;
-
-var draggable = document.getElementById('draggable');
-
-draggable.addEventListener('mousedown', function(e) {
-isMouseDown = true;
-initX = e.offsetX;
-initY = e.offsetY;
-document.body.classList.add('no-select');
-});
-
-document.addEventListener('mousemove', function(e) {
-if (isMouseDown) {
-var cx = e.clientX - initX;
-var cy = e.clientY - initY;
-draggable.style.left = cx + 'px';
-draggable.style.top = cy + 'px';
-if(cx<50&&cy<50){
-	//isMouseDown=0;
-	//todo
-}
-}
-});
-
-draggable.addEventListener('mouseup', function() {
-isMouseDown = false;
-document.body.classList.remove('no-select');
-});
-
-document.addEventListener('mouseup', function(e) {
-if (e.clientY > window.innerHeight || e.clientY < 0 || e.clientX < 0 || e.clientX > window.innerWidth) {
-isMouseDown = false;
-document.body.classList.remove('no-select');
-}
-});
-</script>
+<div id='write'  class=''><h1 id='1走夜路'><span>1.走夜路</span></h1><p><span>昨天晚上下班回家，一民警迎面巡逻而来。突然对我大喊：站住！</span></p><p><strong><span>民警</span></strong><span>：</span><code>int</code><span> 类型占几个字节？</span></p><p><span>我：4 个。</span></p><p><strong><span>民警</span></strong><span>：你可以走了。</span></p><p><span>我感到很诧异。</span></p><p><strong><span>我</span></strong><span>：为什么问这样的问题？</span></p><p><strong><span>民警</span></strong><span>：深夜还在街上走，寒酸苦逼的样子，</span><strong><span>不是小偷就是程序员</span></strong><span>。</span></p><h1 id='2bug知时节'><span>2.BUG知时节</span></h1><p><span>bug知时节，上线乃发生。</span></p><p><span>随风潜入夜，404无声。</span></p><p><span>野径云俱黑，孤窗火独明。</span></p><p><span>晓看公司处，一只程序猿。</span></p><h1 id='3注释'><span>3.注释</span></h1><p><strong><span>A</span></strong><span>：嘿，</span><code>//</code><span>是什么意思？</span></p><p><strong><span>B</span></strong><span>：嘿。</span></p><p><strong><span>A</span></strong><span>：呃，我问你</span><code>//</code><span>是什么意思？</span></p><p><strong><span>B</span></strong><span>：问吧。</span></p><p><strong><span>A</span></strong><span>：我刚才不是问了吗？</span></p><p><strong><span>B</span></strong><span>：问了什么？</span></p><p><strong><span>A</span></strong><span>：你看看记录。</span></p><p><strong><span>B</span></strong><span>：看了。</span></p><p><strong><span>A</span></strong><span>：所以说</span><code>//</code><span>是什么意思？</span></p><p><strong><span>B</span></strong><span>：所以什么？</span></p><h1 id='4上线'><span>4.上线</span></h1><p><span>老板：小程，下班前新版本一定要上线！</span></p><p><span>小程：好的。</span></p><p><span>第二天，老板上班，问小程：新版本怎么还没上线？</span></p><p><span>小程：我还没下班呢。</span></p><h1 id='5洗发水死循环'><span>5.洗发水死循环</span></h1><p><span>老公给程序员老婆买了一瓶新的洗发水。于是，老婆在浴室待了一晚上。</span></p><p><span>因为洗发水的使用说明上写着：</span><code>揉出泡沫，冲水，然后重复</code><span>。</span></p><pre class="md-fences md-end-block ty-contain-cm modeLoaded" spellcheck="false" lang="c++"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="c++"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51562px; left: 8px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">while</span>(<span class="cm-number">1</span>){</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">揉出泡沫</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;<span class="cm-variable">冲水</span>;</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">}</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 92px;"></div><div class="CodeMirror-gutters" style="display: none; height: 92px;"></div></div></div></pre><p>&nbsp;</p><p><span>于是，她在浴室待了一晚上，将整瓶洗发水都用完了。</span></p><h1 id='6客户端'><span>6.客户端</span></h1><p><span>一个IT经理走进一家拉面馆说：“你们需要客户端吗？” </span></p><p><span>老板说：“面一般是伙计端，忙的时候才需要客户端。”</span></p><h1 id='7stray-243-in-program'><span>7.stray ‘\243‘ in program</span></h1><p><span>十行代码九个警告八个错误竟然敢说七日精通六天学会五湖四海也不见如此三心二意之项目经理简直一等下流</span><mark><span>；</span></mark></p><p><span>（请自行断句，以及你知道为什么报错吗）</span></p><h1 id='8push-and-pop'><span>8.Push and pop</span></h1><p><span>区分是否程序员的方法之一：</span><code>push</code><span>的反义词是什么？ </span></p><p><span>非程序员:</span><code>pull</code><span> ；程序员:</span><code>pop</code><span>。</span></p><h1 id='9世界上最远的距离'><span>9.世界上最远的距离</span></h1><p><span>世界上最远的距离，是我在if里你在else里，虽然经常一起出现，但却永不结伴执行。</span></p><h1 id='10进制转换'><span>10.进制转换</span></h1><p><span>为什么程序员总是把万圣节和圣诞节搞混？</span>
+<span>因为 </span><strong><span>Oct 31</span></strong><span> 等于 </span><strong><span>Dec 25</span></strong><span>。</span></p><h1 id='11错误和警告'><span>11.错误和警告</span></h1><p><span>一个人正在抽烟，吐着烟圈。他女朋友生气了发飙道，“你没看见包装盒上的警告么？吸烟有害健康！”</span>
+<span>那人回答道：“我是程序员。我们不关心警告（Warning），只关心错误（Error）。”</span></p><h1 id='12有的女人'><span>12.有的女人</span></h1><p><span>有的女人就是Windows，虽然很优秀，但是安全隐患太大。</span>
+<span>有的女人就是MFC，她条件很好，然而不是谁都能玩的起。</span>
+<span>有的女人就是C#，长的很漂亮，但是家务活不行。</span>
+<span>有的女人就是C++，她会默默的为你做很多的事情。</span>
+<span>有的女人就是汇编，虽然很麻烦，但是有的时候还得求它。</span>
+<span>有的女人就是STL，她会为你的发展带来莫大的帮助。</span></p><h1 id='13debug'><span>13.debug</span></h1><p><span>程序员最喜欢七阿哥，因为他弟八阿哥（debug）。。。</span></p><p><a href='https://msdsl520.github.io/egg/2.html'><span>关于八阿哥，请单击这里，然后看第二条</span></a></p><h1 id='14公交车'><span>14.公交车</span></h1><p><span>曾经有一位前端程序员，每次上下班都要坐403路公交车回家。</span></p><p><span>一天，他在调试服务器时看到了一串错误代码：</span><code>Fobbrian</code></p><p><span>他想，是不是该下班了</span></p><a href="3.html">查看往期</a></div></div>
 </body>
 </html>
