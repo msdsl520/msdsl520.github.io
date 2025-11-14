@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html oncontextmenu="self.event.returnValue=false" onselectstart="return false">
+    <head>
+        <style>
+            html{
+                transition-duration: 0.5s;
+                height: 100%;
+                margin: 0;
+            }
+            body {
+                height: 100%;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                transition-duration: 0.5s;
+                justify-content: center;
+                overflow: hidden; /* 屏蔽滚动条 */
+            }
+            .bjimg {
+                font-size: 256px;
+                text-align: center;
+                transition-duration: 0.5s;
+                position: relative; /* 基于自身位置计算 */
+            }
+            /* 适配设备 */
+            @media (max-width: 1100px) {
+               .bjimg {
+                    font-size: 200px;
+                }
+            }
+            @media (max-width: 800px) {
+               .bjimg {
+                    font-size: 128px;
+                }
+            }
+            @media (max-width: 600px) {
+               .bjimg {
+                    font-size: 64px;
+                }
+            }
+            @media (max-width: 150px) {
+               .bjimg {
+                    font-size: 32px;
+                }
+            }
+            button {
+                border-radius: 12px;
+                border: none;
+                padding: 14px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 4px;
+                transition-duration: 0.5s;
+                cursor: pointer;
+                position: fixed;
+                opacity: 1;
+                transition: opacity 0.5s ease;
+                z-index: 100; 
+            }
+            #fullscreenbtn {
+                top: 10px;
+                right: 10px;
+            }
+            #modebtn {
+                top: 10px;
+                right: 70px;
+            }
+
+            /* 按钮隐藏 */
+            .button-hidden {
+                opacity: 0;
+                pointer-events: none; /*禁用点击 */
+            }
+
+            .dark-mode {
+                background-color: #000000;
+                color: #FFFFFF;
+            }
+            .light-mode {
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            .dark-mode button {
+                background-color: #333333;
+                color: white;
+            }
+            .light-mode button {
+                background-color: #cccccc;
+                color: #333333;
+            }
+
+            /*检测系统深色 */
+            @media (prefers-color-scheme: dark) {
+                .system-dark-mode .dark-mode {
+                    display: block;
+                }
+                .system-dark-mode .light-mode {
+                    display: none;
+                }
+            }
+            @media (prefers-color-scheme: light) {
+                .system-dark-mode .light-mode {
+                    display: block;
+                }
+                .system-dark-mode .dark-mode {
+                    display: none;
+                }
+            }
+
+            /* 自定义图标样式 - 替代Font Awesome */
+            .icon {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                position: relative;
+            }
+
+            /* 全屏图标 */
+            .icon-expand::before, .icon-expand::after,
+            .icon-compress::before, .icon-compress::after {
+                content: '';
+                position: absolute;
+                background: currentColor;
+            }
+            .icon-expand::before {
+                width: 100%;
+                height: 3px;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+            .icon-expand::after {
+                width: 3px;
+                height: 100%;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .icon-compress::before {
+                width: 60%;
+                height: 3px;
+                top: 50%;
+                left: 20%;
+                transform: translateY(-50%);
+            }
+            .icon-compress::after {
+                width: 3px;
+                height: 60%;
+                top: 20%;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            /* 月亮图标 */
+            .icon-moon::before {
+                content: '';
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 3px solid currentColor;
+                top: 0;
+                left: 0;
+                transform: rotate(45deg);
+            }
+            .icon-moon::after {
+                content: '';
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                background: inherit;
+                top: 3px;
+                left: 3px;
+            }
+
+            /* 太阳图标 */
+            .icon-sun {
+                border-radius: 50%;
+                background: currentColor;
+            }
+            .icon-sun::before, .icon-sun::after {
+                content: '';
+                position: absolute;
+                background: currentColor;
+            }
+            .icon-sun::before {
+                width: 100%;
+                height: 3px;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+            .icon-sun::after {
+                width: 3px;
+                height: 100%;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        </style>
+        <meta charset="UTF-8">
+        <title>离线版时钟</title>
+    </head>
+    <body onload="showTime()">
+        <div class="bjimg">
+            <div id="time"></div>
+        </div>
+        <button id="fullscreenbtn"><span class="icon icon-expand"></span></button>
+        <button id="modebtn" onclick="toggleMode()"><span class="icon icon-moon"></span></button>
+
+        <script>
+            function showTime() {
+                var date = new Date();
+                var time = date.toLocaleTimeString();
+                document.getElementById("time").innerHTML = time;
+            }
+            setInterval(showTime, 1000);
+
+            function detectSystemDarkMode() {
+                const html = document.documentElement;
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                html.classList.add('system-dark-mode');
+                if (prefersDark) {
+                    html.classList.add('dark-mode');
+                    html.classList.remove('light-mode');
+                    document.getElementById('modebtn').innerHTML = '<span class="icon icon-moon"></span>';
+                } else {
+                    html.classList.add('light-mode');
+                    html.classList.remove('dark-mode');
+                    document.getElementById('modebtn').innerHTML = '<span class="icon icon-sun"></span>';
+                }
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (e.matches) {
+                        enableDarkMode();
+                    } else {
+                        enableLightMode();
+                    }
+                });
+            }
+
+            function enableDarkMode() {
+                const html = document.documentElement;
+                const bjimg = document.querySelector('.bjimg');
+                const modeBtn = document.getElementById('modebtn');
+                html.classList.remove('light-mode');
+                html.classList.add('dark-mode');
+                bjimg.classList.remove('light-mode');
+                bjimg.classList.add('dark-mode');
+                modeBtn.innerHTML = '<span class="icon icon-moon"></span>';
+            }
+
+            function enableLightMode() {
+                const html = document.documentElement;
+                const bjimg = document.querySelector('.bjimg');
+                const modeBtn = document.getElementById('modebtn');
+                html.classList.remove('dark-mode');
+                html.classList.add('light-mode');
+                bjimg.classList.remove('dark-mode');
+                bjimg.classList.add('light-mode');
+                modeBtn.innerHTML = '<span class="icon icon-sun"></span>';
+            }
+
+            function toggleMode() {
+                const html = document.documentElement;
+                const isDarkMode = html.classList.contains('dark-mode');
+                html.classList.remove('system-dark-mode');
+                if (isDarkMode) {
+                    enableLightMode();
+                } else {
+                    enableDarkMode();
+                }
+            }
+
+            // 全屏
+            const html = document.querySelector('html');
+            const fullScreenBtn = document.getElementById('fullscreenbtn');
+            fullScreenBtn.onclick = () => {
+                let full = document.fullscreenElement;
+                if (!full) {
+                    html.requestFullscreen().then(() => {
+                        fullScreenBtn.innerHTML = '<span class="icon icon-compress"></span>';
+                    }).catch(() => {});
+                } else {
+                    fullScreenBtn.innerHTML = '<span class="icon icon-expand"></span>';
+                    document.exitFullscreen();
+                }
+            }
+
+            document.addEventListener("fullscreenchange", function() {
+                let full = document.fullscreenElement;
+                if (full) {
+                    fullScreenBtn.innerHTML = '<span class="icon icon-compress"></span>';
+                } else {
+                    fullScreenBtn.innerHTML = '<span class="icon icon-expand"></span>';
+                }
+            });
+
+            // 按钮自动隐藏
+            let mouseTimer;
+            let buttons; // 先声明后获取
+            function hideButtons() {
+                buttons.forEach(btn => {
+                    if (btn) btn.classList.add('button-hidden');
+                });
+            }
+            function showButtons() {
+                buttons.forEach(btn => {
+                    if (btn) btn.classList.remove('button-hidden');
+                });
+            }
+            function resetTimer() {
+                clearTimeout(mouseTimer);
+                showButtons();
+                mouseTimer = setTimeout(hideButtons, 15000);
+            }
+
+            // 防烧屏
+            let currentY = 0; // 当前Y轴
+            const maxDownOffset = 20; // 最大向下
+            const maxUpOffset=150; // 最大向上
+            const moveRange=2; // 每次最大
+            
+            function moveClock() {
+                const timeElement=document.querySelector('.bjimg');
+                const newY=currentY+(Math.floor(Math.random() *(moveRange * 2 + 1)) - moveRange);
+                // 限制范围
+                if(newY>maxDownOffset){
+                    currentY=maxDownOffset;
+                }else if(newY<-maxUpOffset){
+                    currentY=-maxUpOffset;
+                }else{
+                    currentY=newY;
+                }
+                timeElement.style.transform=`translate(0, ${currentY}px)`;
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                detectSystemDarkMode();
+                buttons = [
+                    document.getElementById('fullscreenbtn'),
+                    document.getElementById('modebtn')
+                ];
+                resetTimer();
+                document.addEventListener('mousemove', resetTimer);
+                // 每20000秒移动一次
+                setInterval(moveClock, 20000);
+            });
+        </script>
+    </body>
+</html>
