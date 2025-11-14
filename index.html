@@ -41,28 +41,22 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        .nav-links {
-	    width:5rem;
-            display: flex;
-            flex-wrap: nowrap;
+        .article-list {
+          //  display: flex;
+         //   flex-wrap: nowrap;
             gap: 10px;
  	    border-radius: 20px;
             background: #ebecef;
             box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
             margin-bottom: 20px;
         }
-        .nav-links a:hover{
-		color: #0066cc;
-	}
-        .nav-links  {
-            padding: 8px 15px;
+
+        .article-list  {
+          padding: 8px 15px;
             transition: background 0.3s;
         }
         
-        .nav-links:hover {
-            background: #d0d0d0;
-            text-decoration: none;
-        }
+
         
         /* 响应式调整 */
         @media (min-width: 768px) {
@@ -110,6 +104,12 @@
 	//	width: 184px;
 	//	height: 184px;
 	}	
+   .article {
+            font-size: 16px;
+            line-height: 1.8;
+            display: block;
+            padding: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -138,16 +138,24 @@
                 </p>
             </div>
 
-            <h3>
-                <div>
-			<a href="soft\"class="nav-links">我的软件</a>
-            		  <a href="article\"class="nav-links">我的文章</a>
+            
+                <div class="article-list">
+            		<div style="display: flex; justify-content: space-between; align-items: center;">
+     			   <h3>  我的文章</h3>
+     		   	<a href="/article" style="color: #808080; font-weight: bold; padding: 5px 10px;">全部文章 ヾ(•ω•`)o</a>
+  		 	 </div>
+			<a class="article" href="https://blog.csdn.net/smpdx/article/details/152565513"> 揭开网页加载背后的神秘面纱</a>
+       			 <a class="article" href="https://blog.csdn.net/smpdx/article/details/145531785"> 网络安全：数字世界的隐形铠甲</a>
+       			 <a class="article" href="https://blog.csdn.net/smpdx/article/details/145643160"> 加密算法：信息安全的基石</a>
+       			 <a class="article" href="https://blog.csdn.net/smpdx/article/details/147184655"> 数字证书：网络中的“身份证”</a>
+			  <a class="article" href="https://blog.csdn.net/smpdx/article/details/148047554"> 解锁HTML适配密码：让网页在不同设备自由“变身”</a>
 		</div>
-		</h3>
+		
         </main>
         
         <aside class="sidebar">
             <!-- TODO:侧边栏内容 -->
+
         </aside>
     </div>
     
