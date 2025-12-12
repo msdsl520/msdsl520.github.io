@@ -1,0 +1,10 @@
+{
+  "name": "时钟",
+  "icons": [
+    {
+      "src": "clock-icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
