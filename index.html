@@ -78,14 +78,14 @@ h2,h3{color:#222;}
         
       <aside class="sidebar">
     <div class="countdown-card">
-        <h3 class="countdown-title">中考倒计时</h3>
+        <h3 class="countdown-title" id="countdowntitle">中考倒计时</h3>
         <div class="countdown-days" id="days-remaining">计算中...</div>
         <div class="progress-container">
             <div class="progress-bar" id="countdown-progress">
                 <span class="progress-ripple"></span>
             </div>
         </div>
-        <p class="countdown-target">2026年6月13日</p>
+        <p class="countdown-target" id="days2">2026年6月13日</p>
     </div>
 </aside>
 
@@ -106,7 +106,8 @@ const daysRemaining=Math.ceil(timeDiff/(1000*60*60*24));
 //获取DOM元素
 const daysElement=document.getElementById('days-remaining');
 const progressElement=document.getElementById('countdown-progress');
-
+const text2=document.getElementById('days2');
+const titlecount=document.getElementById('countdowntitle');
 //更新显示的天数
 daysElement.textContent=`${daysRemaining} 天`;
 
@@ -116,15 +117,18 @@ let progressColor="#4CAF50";
 //当剩余天数不足90天时，数字和进度条都变红
 if(daysRemaining<90&&daysRemaining>0){
 daysElement.classList.add('red');
+titlecount.textContent="中考已经很近了";
+text2.textContent="黑发不知勤学早，白首方悔读书迟";
 progressColor="#ff4d4d";//红色，和数字同色
 }else{
 daysElement.classList.remove('red');
+titlecount.textContent="中考倒计时";
+text2.textContent="读万卷书，行万里路";
 //倒计时结束时进度条为橙色
+}
 if(daysRemaining<=0){
 progressColor="#ff9800";
 }
-}
-
 //计算进度条（从2023年9月1日初三开学开始计算）
 const startDate=new Date(2023,8,1);
 const totalDays=Math.ceil((targetDate-startDate)/(1000*60*60*24));
@@ -137,7 +141,9 @@ progressElement.style.backgroundColor=progressColor;
 
 //倒计时结束处理
 if(daysRemaining<=0){
-daysElement.textContent="中考已至，金榜题名";
+daysElement.textContent="中考已至";
+text2.textContent="金榜题名";
+titlecount.textContent="祝各位考生考试顺利！";
 daysElement.classList.remove('red');
 progressElement.style.width="100%";
 }
