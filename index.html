@@ -6,112 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>茂盛的森林 的个人主页</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background: #ebecef;
-            color: #333;
-        }
-        a {
-            text-decoration: none;
-            color: #0066cc;
-        }
-        h2, h3 {
-            color: #222;
-        }
-        .ui, .uip {
-            border-radius: 20px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .ui {
-            border-radius: 20px;
-        }
-        .ui img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-        }
-        
-        /*响应*/
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .article-list {
-          //  display: flex;
-         //   flex-wrap: nowrap;
-            gap: 10px;
- 	    border-radius: 20px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
-            margin-bottom: 20px;
-        }
+        body{font-family:Arial,sans-serif;line-height:1.6;margin:0;padding:20px;background:#ebecef;color:#333;}
+a{text-decoration:none;color:#0066cc;}
+h2,h3{color:#222;}
+.ui,.uip{border-radius:20px;background:#ebecef;box-shadow:10px 10px 21px #8f9092,-10px -10px 21px #ffffff;padding:15px;margin-bottom:20px;}
+.ui{border-radius:20px;}
+.uiimg{max-width:100%;height:auto;border-radius:15px;}
+/*响应*/
+.container{max-width:1200px;margin:0 auto;}
+.article-list{gap:10px;border-radius:20px;background:#ebecef;box-shadow:10px 10px 21px #8f9092,-10px -10px 21px #ffffff;margin-bottom:20px;}
+.article-list{padding:8px 15px;transition:background 0.3s;}
+/*响应调整*/
+@media(min-width:768px){body{padding:30px;}.ui,.uip{padding:20px;}.flex-container{display:flex;gap:20px;}.flex-container.ui,.flex-container.uip{flex:1;}}@media(min-width:1024px){body{padding:40px;}.container{display:grid;grid-template-columns:3fr 1fr;gap:30px;}.main-content{grid-column:1;}.sidebar{grid-column:2;}}
+.imgui{border-radius:50px;background:#ebecef;box-shadow:10px 10px 21px #8f9092,-10px -10px 21px #ffffff;}	
+.article{font-size:16px;line-height:1.8;display:block;padding:5px 0;}
+</style>
 
-        .article-list  {
-          padding: 8px 15px;
-            transition: background 0.3s;
-        }
-        
-
-        
-        /* 响应式调整 */
-        @media (min-width: 768px) {
-            body {
-                padding: 30px;
-            }
-            
-            .ui, .uip {
-                padding: 20px;
-            }
-            
-            .flex-container {
-                display: flex;
-                gap: 20px;
-            }
-            
-            .flex-container .ui, .flex-container .uip {
-                flex: 1;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            body {
-                padding: 40px;
-            }
-            
-            .container {
-                display: grid;
-                grid-template-columns: 3fr 1fr;
-                gap: 30px;
-            }
-            
-            .main-content {
-                grid-column: 1;
-            }
-            
-            .sidebar {
-                grid-column: 2;
-            }
-        }
-	.imgui{
-		border-radius: 50px;
-		background: #ebecef;
-		box-shadow:  10px 10px 21px #8f9092, -10px -10px 21px #ffffff;
-	//	width: 184px;
-	//	height: 184px;
-	}	
-   .article {
-            font-size: 16px;
-            line-height: 1.8;
-            display: block;
-            padding: 5px 0;
-        }
-    </style>
+<style>
+.countdown-card{border-radius:20px;background:#333842;color:#ffffff;padding:20px;margin-bottom:20px;box-shadow:5px 5px 15px rgba(0,0,0,0.3),-5px -5px 15px rgba(255,255,255,0.05);}
+.countdown-title{text-align:center;margin-top:0;margin-bottom:15px;color:#e0e0e0;}
+.countdown-days{text-align:center;font-size:2.5rem;font-weight:bold;margin:10px 0 20px;transition:color 0.3s ease;}
+.countdown-days.red{color:#ff4d4d;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+.progress-container{width:100%;height:10px;background-color:#4a5059;border-radius:5px;overflow:hidden;margin:15px 0;position:relative;}
+.progress-bar{height:100%;background-color:#4CAF50;width:0%;transition:all 1s ease-in-out;border-top-right-radius:5px;border-bottom-right-radius:5px;position:relative;overflow:hidden;}
+.progress-ripple{position:absolute;top:0;left:0;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),rgba(255,255,255,0.2),transparent);transform:translateX(-100%);animation:ripple-move 3s infinite cubic-bezier(0.2,0,0.8,1);}
+@keyframes ripple-move{0%{transform:translateX(-100%);}50%{transform:translateX(100%);}100%{transform:translateX(200%);}}
+.countdown-target{text-align:center;margin:10px 0 0;font-size:0.9rem;color:#b0b0b0;}
+</style>
 </head>
 <body>
     <div class="container">
@@ -154,24 +76,92 @@
 		
         </main>
         
-        <aside class="sidebar">
-            <!-- TODO:侧边栏内容 -->
-
-        </aside>
+      <aside class="sidebar">
+    <div class="countdown-card">
+        <h3 class="countdown-title">中考倒计时</h3>
+        <div class="countdown-days" id="days-remaining">计算中...</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="countdown-progress">
+                <span class="progress-ripple"></span>
+            </div>
+        </div>
+        <p class="countdown-target">2026年6月13日</p>
     </div>
-    
-    <script type="text/javascript">
-        var clicks = 0;
-        function hello() {
-            clicks += 1;
-            document.getElementById("clicks").innerHTML = clicks;
-            if(clicks >= 5){
-                alert("你发现了一个小彩蛋");
-                window.location.href='/egg';
-            };        
-        };
-    </script>
-    <img id="clicks" style="color:rgba(255, 255, 255, 0);"></img>
+</aside>
+
+
+
+<script>
+// 设置目标日期：2026年6月13日
+const targetDate=new Date(2026,5,13);//月份从0开始计数，6月对应5
+
+//计算并更新倒计时
+function updateCountdown(){
+const now=new Date();
+const timeDiff=targetDate-now;
+
+//计算剩余天数（向上取整）
+const daysRemaining=Math.ceil(timeDiff/(1000*60*60*24));
+
+//获取DOM元素
+const daysElement=document.getElementById('days-remaining');
+const progressElement=document.getElementById('countdown-progress');
+
+//更新显示的天数
+daysElement.textContent=`${daysRemaining} 天`;
+
+//进度条默认颜色（绿色）
+let progressColor="#4CAF50";
+
+//当剩余天数不足90天时，数字和进度条都变红
+if(daysRemaining<90&&daysRemaining>0){
+daysElement.classList.add('red');
+progressColor="#ff4d4d";//红色，和数字同色
+}else{
+daysElement.classList.remove('red');
+//倒计时结束时进度条为橙色
+if(daysRemaining<=0){
+progressColor="#ff9800";
+}
+}
+
+//计算进度条（从2023年9月1日初三开学开始计算）
+const startDate=new Date(2023,8,1);
+const totalDays=Math.ceil((targetDate-startDate)/(1000*60*60*24));
+const elapsedDays=Math.ceil((now-startDate)/(1000*60*60*24));
+const progressPercentage=Math.min(Math.max((elapsedDays/totalDays)*100,0),100);
+
+//更新进度条样式
+progressElement.style.width=`${progressPercentage}%`;
+progressElement.style.backgroundColor=progressColor;
+
+//倒计时结束处理
+if(daysRemaining<=0){
+daysElement.textContent="中考已至，金榜题名";
+daysElement.classList.remove('red');
+progressElement.style.width="100%";
+}
+}
+
+//初始更新一次
+updateCountdown();
+
+//每分钟更新一次（平衡实时性和性能）
+setInterval(updateCountdown,60000);
+</script>
+</div>
+
+<script type="text/javascript">
+var clicks=0;
+function hello(){
+clicks+=1;
+document.getElementById("clicks").innerHTML=clicks;
+if(clicks>=5){
+alert("你发现了一个小彩蛋");
+window.location.href='/egg';
+};
+};
+</script>
+<img id="clicks"style="color:rgba(255,255,255,0);"></img>
 </body>
 </html>
-    
