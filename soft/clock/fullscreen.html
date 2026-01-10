@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html oncontextmenu="self.event.returnValue=false" onselectstart="return false">
 <head>
-    <!-- 图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <style>
         html {
             transition-duration: 0.5s;
             height: 100%;
             margin: 0;
         }
-
         body {
             height: 100%;
             margin: 0;
@@ -18,41 +15,18 @@
             align-items: center;
             transition-duration: 0.5s;
             justify-content: center;
-            overflow: hidden; /* 屏蔽滚动条 */
+            overflow: hidden;
         }
-
         .bjimg {
             font-size: 256px;
             text-align: center;
             transition-duration: 0.5s;
-            position: relative; /* 基于自身位置计算 */
+            position: relative;
         }
-
-        /* 适配设备 */
-        @media (max-width: 1100px) {
-            .bjimg {
-                font-size: 200px;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .bjimg {
-                font-size: 128px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .bjimg {
-                font-size: 64px;
-            }
-        }
-
-        @media (max-width: 150px) {
-            .bjimg {
-                font-size: 32px;
-            }
-        }
-
+        @media (max-width: 1100px) {.bjimg {font-size: 200px;}}
+        @media (max-width: 800px) {.bjimg {font-size: 128px;}}
+        @media (max-width: 600px) {.bjimg {font-size: 64px;}}
+        @media (max-width: 150px) {.bjimg {font-size: 32px;}}
         button {
             border-radius: 12px;
             border: none;
@@ -69,63 +43,24 @@
             transition: opacity 0.5s ease;
             z-index: 100;
         }
-
         .button-hidden {
             opacity: 0;
-            pointer-events: none; /*禁用点击 */
+            pointer-events: none;
         }
-
-        #fullscreenbtn {
-            top: 10px;
-            right: 10px;
-        }
-
-        #modebtn {
-            top: 10px;
-            right: 70px;
-        }
-
-        .dark-mode {
-            background-color: #000000;
-            color: #FFFFFF;
-        }
-
-        .light-mode {
-            background-color: #FFFFFF;
-            color: #000000;
-        }
-
-        .dark-mode button { /* 深色按钮 */
-            background-color: #333333;
-            color: white;
-        }
-
-        .light-mode button { /* 浅色按钮 */
-            background-color: #cccccc;
-            color: #333333;
-        }
-
-        /*检测系统深色 */
+        #fullscreenbtn {top: 10px; right: 10px;}
+        #modebtn {top: 10px; right: 70px;}
+        .dark-mode {background-color: #000; color: #fff;}
+        .light-mode {background-color: #fff; color: #000;}
+        .dark-mode button {background-color: #333; color: white;}
+        .light-mode button {background-color: #ccc; color: #333;}
         @media (prefers-color-scheme: dark) {
-            .system-dark-mode .dark-mode {
-                display: block;
-            }
-
-            .system-dark-mode .light-mode {
-                display: none;
-            }
+            .system-dark-mode .dark-mode {display: block;}
+            .system-dark-mode .light-mode {display: none;}
         }
-
         @media (prefers-color-scheme: light) {
-            .system-dark-mode .light-mode {
-                display: block;
-            }
-
-            .system-dark-mode .dark-mode {
-                display: none;
-            }
+            .system-dark-mode .light-mode {display: block;}
+            .system-dark-mode .dark-mode {display: none;}
         }
-        /* 提示条 */
         #fullscreen-tip {
             position: fixed;
             bottom: 20px;
@@ -139,14 +74,8 @@
             cursor: pointer;
             text-align: center;
         }
-        .dark-mode #fullscreen-tip {
-            background-color: rgba(51, 51, 51, 0.9);
-            color: #fff;
-        }
-        .light-mode #fullscreen-tip {
-            background-color: rgba(204, 204, 204, 0.9);
-            color: #333;
-        }
+        .dark-mode #fullscreen-tip {background-color: rgba(51,51,51,0.9); color: #fff;}
+        .light-mode #fullscreen-tip {background-color: rgba(204,204,204,0.9); color: #333;}
         #fullscreen-tip.hidden {
             opacity: 0;
             transform: translateX(-50%) translateY(20px);
@@ -157,21 +86,19 @@
     <title>时钟</title>
 </head>
 <body onload="showTime()">
-    <div class="bjimg">
-        <div id="time"></div>
-    </div>
+    <div class="bjimg"><div id="time"></div></div>
     <button id="fullscreenbtn"><i class="fa-solid fa-expand"></i></button>
     <button id="modebtn" onclick="toggleMode()"><i class="fa-solid fa-moon"></i></button>
-    <div id="fullscreen-tip">由于浏览器限制，您需要点击页面才能完成全屏</div>
+    <div id="fullscreen-tip">点击页面任意位置进入全屏</div>
 
     <script>
+        // 时钟逻辑
         function showTime() {
-            var date = new Date();
-            var time = date.toLocaleTimeString();
-            document.getElementById("time").innerHTML = time;
+            document.getElementById("time").innerHTML = new Date().toLocaleTimeString();
         }
         setInterval(showTime, 1000);
 
+        // 深色模式逻辑
         function detectSystemDarkMode() {
             const html = document.documentElement;
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -186,48 +113,28 @@
                 document.getElementById('modebtn').innerHTML = '<i class="fa-solid fa-sun"></i>';
             }
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (e.matches) {
-                    enableDarkMode();
-                } else {
-                    enableLightMode();
-                }
+                e.matches ? enableDarkMode() : enableLightMode();
             });
         }
-
         function enableDarkMode() {
             const html = document.documentElement;
-            const bjimg = document.querySelector('.bjimg');
-            const modeBtn = document.getElementById('modebtn');
             html.classList.remove('light-mode');
             html.classList.add('dark-mode');
-            bjimg.classList.remove('light-mode');
-            bjimg.classList.add('dark-mode');
-            modeBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+            document.getElementById('modebtn').innerHTML = '<i class="fa-solid fa-moon"></i>';
         }
-
         function enableLightMode() {
             const html = document.documentElement;
-            const bjimg = document.querySelector('.bjimg');
-            const modeBtn = document.getElementById('modebtn');
             html.classList.remove('dark-mode');
             html.classList.add('light-mode');
-            bjimg.classList.remove('dark-mode');
-            bjimg.classList.add('light-mode');
-            modeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            document.getElementById('modebtn').innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
-
         function toggleMode() {
             const html = document.documentElement;
-            const isDarkMode = html.classList.contains('dark-mode');
             html.classList.remove('system-dark-mode');
-            if (isDarkMode) {
-                enableLightMode();
-            } else {
-                enableDarkMode();
-            }
+            html.classList.contains('dark-mode') ? enableLightMode() : enableDarkMode();
         }
 
-        const html = document.querySelector('html');
+        const html = document.documentElement;
         const fullScreenBtn = document.getElementById('fullscreenbtn');
         const fullscreenTip = document.getElementById('fullscreen-tip');
         
@@ -236,50 +143,47 @@
         }
         
         function toggleFullscreen() {
-            let full = document.fullscreenElement;
-            if (!full) {
+            if (!document.fullscreenElement) {
                 html.requestFullscreen().then(() => {
                     fullScreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
-                    hideFullscreenTip(); 
+                    hideFullscreenTip();
                 }).catch(err => {
-                    console.log('全屏触发失败：', err);
+                    console.log('全屏失败：', err);
+                    fullscreenTip.innerHTML = '请点击右上角全屏按钮';
+                   
                 });
             } else {
-                fullScreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
                 document.exitFullscreen();
+                fullScreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
             }
         }
 
         fullScreenBtn.onclick = toggleFullscreen;
 
-        // 核心1：检测访问来源（跳转/手动输入）
         let isFromOtherPage = false;
         if (document.referrer && document.referrer !== window.location.href) {
             isFromOtherPage = true;
         }
-
-        // 核心2：手动访问时直接隐藏提示条；跳转访问时保留提示条
-        if (!isFromOtherPage) {
-            hideFullscreenTip(); // 手动输入网址 → 直接隐藏提示条
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('from') === 'jump') {
+            isFromOtherPage = true;
         }
 
-        // 核心3：仅跳转访问时，点击页面触发全屏；手动访问不触发
+        if (!isFromOtherPage) {
+            hideFullscreenTip();
+        }
         let isFirstClick = true;
         document.addEventListener('click', () => {
             if (isFirstClick && isFromOtherPage) {
                 toggleFullscreen();
-                hideFullscreenTip();            
                 isFirstClick = false;
             }
-            // 手动访问时，点击仅标记首次点击完成（无其他操作）
             else if (isFirstClick && !isFromOtherPage) {
                 isFirstClick = false;
             }
-        }, { once: true });
-
+        }, { once: true }); 
         document.addEventListener("fullscreenchange", function () {
-            let full = document.fullscreenElement;
-            if (full) {
+            if (document.fullscreenElement) {
                 fullScreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
                 hideFullscreenTip();
             } else {
@@ -292,17 +196,11 @@
         let mouseTimer;
         let buttons;         
         function hideButtons() {
-            buttons.forEach(btn => {
-                if (btn) btn.classList.add('button-hidden');
-            });
+            buttons.forEach(btn => btn?.classList.add('button-hidden'));
         }
-
         function showButtons() {
-            buttons.forEach(btn => {
-                if (btn) btn.classList.remove('button-hidden');
-            });
+            buttons.forEach(btn => btn?.classList.remove('button-hidden'));
         }
-
         function resetTimer() {
             clearTimeout(mouseTimer);
             showButtons();
@@ -313,32 +211,21 @@
         const maxDownOffset = 20; 
         const maxUpOffset = 150; 
         const moveRange = 2;
-
         function moveClock() {
             const timeElement = document.querySelector('.bjimg');
             const newY = currentY + (Math.floor(Math.random() * (moveRange * 2 + 1)) - moveRange);
-            if (newY > maxDownOffset) {
-                currentY = maxDownOffset;
-            } else if (newY < -maxUpOffset) {
-                currentY = -maxUpOffset;
-            } else {
-                currentY = newY;
-            }
+            currentY = Math.max(-maxUpOffset, Math.min(maxDownOffset, newY));
             timeElement.style.transform = `translate(0, ${currentY}px)`;
         }
 
+        // 初始化
         document.addEventListener('DOMContentLoaded', function () {
             detectSystemDarkMode();
-            buttons = [
-                document.getElementById('fullscreenbtn'),
-                document.getElementById('modebtn')
-            ];
+            buttons = [fullScreenBtn, document.getElementById('modebtn')];
             resetTimer();
             document.addEventListener('mousemove', resetTimer);
             setInterval(moveClock, 20000);
-            if (document.fullscreenElement) {
-                hideFullscreenTip();
-            }
+            if (document.fullscreenElement) hideFullscreenTip();
         });
     </script>
 </body>
