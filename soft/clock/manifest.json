@@ -1,7 +1,7 @@
 {
-  "name": "时钟",
-  "short_name": "时钟",
-  "description": "一个简单的时钟",
+  "name": "轻时钟",
+  "short_name": "轻时钟",
+  "description": "一个轻量化的时钟App",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
