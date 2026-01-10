@@ -89,7 +89,7 @@
     <div class="bjimg"><div id="time"></div></div>
     <button id="fullscreenbtn"><i class="fa-solid fa-expand"></i></button>
     <button id="modebtn" onclick="toggleMode()"><i class="fa-solid fa-moon"></i></button>
-    <div id="fullscreen-tip">点击页面任意位置进入全屏</div>
+    <div id="fullscreen-tip">由于浏览器限制，您需要点击页面才能进入全屏</div>
 
     <script>
         // 时钟逻辑
@@ -149,7 +149,7 @@
                     hideFullscreenTip();
                 }).catch(err => {
                     console.log('全屏失败：', err);
-                    fullscreenTip.innerHTML = '请点击右上角全屏按钮';
+                    fullscreenTip.innerHTML = '由于浏览器限制，请点击右上角全屏按钮';
                    
                 });
             } else {
