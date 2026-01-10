@@ -252,11 +252,24 @@
 
         fullScreenBtn.onclick = toggleFullscreen;
 
+        let isFromOtherPage = false;
+        if (document.referrer && document.referrer !== window.location.href) {
+            isFromOtherPage = true;
+        }
+console.log(document.referrer);
+        if (!isFromOtherPage) {
+            hideFullscreenTip();
+        }
+
         let isFirstClick = true;
         document.addEventListener('click', () => {
-            if (isFirstClick) {
+            if (isFirstClick && isFromOtherPage) {
                 toggleFullscreen();
-                hideFullscreenTip();                isFirstClick = false;
+                hideFullscreenTip();            
+                isFirstClick = false;
+            }
+            else if (isFirstClick && !isFromOtherPage) {
+                isFirstClick = false;
             }
         }, { once: true });
 
@@ -264,7 +277,8 @@
             let full = document.fullscreenElement;
             if (full) {
                 fullScreenBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
-                hideFullscreenTip();             } else {
+                hideFullscreenTip();
+            } else {
                 fullScreenBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
             }
         });
@@ -272,7 +286,8 @@
         fullscreenTip.addEventListener('click', hideFullscreenTip);
 
         let mouseTimer;
-        let buttons;         function hideButtons() {
+        let buttons;         
+        function hideButtons() {
             buttons.forEach(btn => {
                 if (btn) btn.classList.add('button-hidden');
             });
@@ -307,6 +322,7 @@
             }
             timeElement.style.transform = `translate(0, ${currentY}px)`;
         }
+
         document.addEventListener('DOMContentLoaded', function () {
             detectSystemDarkMode();
             buttons = [
