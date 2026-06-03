@@ -1,0 +1,57 @@
+<!DOCTYPE html> <html lang=zh-CN> <head> <meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>MeoW 消息推送系统</title><style>*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI','Microsoft YaHei',sans-serif}body{background:linear-gradient(135deg,#667eea 0,#764ba2 100%);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}.container{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);width:100%;max-width:500px;padding:30px}h1{color:#333;text-align:center;margin-bottom:30px;font-size:24px;font-weight:600}.form-group{margin-bottom:20px}label{display:block;margin-bottom:8px;font-weight:500;color:#555}input,select,textarea{width:100%;padding:12px 15px;border:1px solid #ddd;border-radius:6px;font-size:14px;transition:border-color .3s}input:focus,select:focus,textarea:focus{outline:0;border-color:#667eea;box-shadow:0 0 0 2px rgba(102,126,234,.2)}textarea{min-height:100px;resize:vertical}.disabled{background-color:#f5f5f5;color:#999;cursor:not-allowed}.btn-container{margin-top:30px}button{width:100%;padding:14px;background:linear-gradient(135deg,#667eea 0,#764ba2 100%);color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:500;cursor:pointer;transition:all .3s}button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 15px rgba(102,126,234,.4)}button:disabled{background:#ccc;cursor:not-allowed;transform:none;box-shadow:none}.required::after{content:" *";color:#e74c3c}.status-message{margin-top:15px;padding:10px;border-radius:4px;text-align:center;font-size:14px;display:none}.success{background-color:#d4edda;color:#155724;display:block}.error{background-color:#f8d7da;color:#721c24;display:block}.info{background-color:#d1ecf1;color:#0c5460;display:block}</style></head><body> <div class=container> <h1>MeoW 消息推送系统</h1> <form id=messageForm> <div class=form-group> <label for=nickname class=required>对方昵称</label> <input id=nickname placeholder=请输入接收消息的用户昵称 required> </div> <div class=form-group> <label for=title>消息标题（可选）</label> <input id=title placeholder="如果不填，将使用默认标题 'MeoW'"> </div> <div class=form-group> <label for=msg class=required>消息内容</label> <textarea id=msg placeholder=请输入要发送的消息内容 required></textarea> </div> <div class=form-group> <label for=url>跳转链接（可选）</label> <input id=url placeholder=请输入完整的URL地址，例如：https://example.com> </div><div class=form-group><label for=msgType>消息显示类型</label><select id=msgType><option value=text>纯文本 (text)</option><option value=html>HTML格式 (html)</option></select> </div> <div class=form-group> <label for=htmlHeight>HTML内容高度（像素）</label> <input type=number id=htmlHeight placeholder=仅在消息类型为HTML时生效，默认200 value=200 min=100 max=1000> </div> <div class=btn-container><button type=submit id=sendBtn>发送消息</button> </div>  </form> </div> <script>document.addEventListener('DOMContentLoaded', function() {
+const form=document.getElementById('messageForm');
+const nicknameInput=document.getElementById('nickname');
+const titleInput=document.getElementById('title');
+const msgInput=document.getElementById('msg');
+const urlInput=document.getElementById('url');
+const msgTypeSelect=document.getElementById('msgType');
+const htmlHeightInput=document.getElementById('htmlHeight');
+const sendBtn=document.getElementById('sendBtn');
+const statusMessage=document.getElementById('statusMessage');updateHtmlHeightInput();
+msgTypeSelect.addEventListener('change', updateHtmlHeightInput);
+function updateHtmlHeightInput() {
+if (msgTypeSelect.value === 'html') {
+htmlHeightInput.classList.remove('disabled');
+htmlHeightInput.disabled=false;
+}else{
+htmlHeightInput.classList.add('disabled');
+htmlHeightInput.disabled=true;
+}}
+form.addEventListener('submit', function(e){e.preventDefault();
+if(!nicknameInput.value.trim()){showStatusMessage('请输入对方昵称', 'error');
+nicknameInput.focus();return;}
+if(!msgInput.value.trim()){
+showStatusMessage('请输入消息内容', 'error');
+msgInput.focus();return;}disableSendButton();
+const nickname = encodeURIComponent(nicknameInput.value.trim());
+const title = titleInput.value.trim() ? encodeURIComponent(titleInput.value.trim()) : 'MeoW';
+const msg=encodeURIComponent(msgInput.value.trim());
+const url=urlInput.value.trim() ? encodeURIComponent(urlInput.value.trim()) : '';
+const msgType=msgTypeSelect.value;
+const htmlHeight=htmlHeightInput.value;
+let requestUrl=`https://api.chuckfang.com/${nickname}/${title}/${msg}`;
+const params=[];
+if(url) params.push(`url=${url}`);
+if(msgType) params.push(`msgType=${msgType}`);
+if(msgType==='html' && htmlHeight) params.push(`htmlHeight=${htmlHeight}`);if (params.length>0) {
+requestUrl+='?'+params.join('&');}
+fetch(requestUrl,{method:'GET'})
+.then(response=>{
+switch(response.status) {case 200:
+showStatusMessage('消息发送成功！', 'success');
+titleInput.value='';msgInput.value='';urlInput.value='';break;case 400:
+showStatusMessage('请求参数有误，请检查输入内容', 'error');break;case 500:
+showStatusMessage('服务器内部错误，请稍后重试', 'error');break;default:
+showStatusMessage(`未知错误，状态码: ${response.status}`, 'error');}}).catch(error => {
+showStatusMessage('网络错误，请检查网络连接后重试', 'error');
+console.error('发送消息时出错:', error);});});
+function showStatusMessage(message, type) {statusMessage.textContent=message;statusMessage.className= 'status-message';switch (type) {
+case 'success':statusMessage.classList.add('success');break;case 'error':
+statusMessage.classList.add('error');break;default:
+statusMessage.classList.add('info');}setTimeout(() => {
+statusMessage.style.display='none';}, 5000);}
+function disableSendButton() {
+sendBtn.disabled = true;let countdown = 5;
+const timer=setInterval(() => {sendBtn.textContent=`请等待 ${countdown} 秒后重试`;countdown--;if (countdown<0) {
+clearInterval(timer);sendBtn.textContent='发送消息';sendBtn.disabled=false;
+}}, 1000);}});</script></body></html>
