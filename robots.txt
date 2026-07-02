@@ -2,5 +2,3 @@
 # 其实我喜欢邱玥颖，喜欢好久了(❤ ω ❤)
 # 最近要毕业了，想跟她表白
 User-agent: *
-Disallow: /biye/
-Disallow: /soft/clock.html
