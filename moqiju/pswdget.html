@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态密码生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            padding: 30px 24px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 25px;
+        }
+
+        .pwd-card {
+            background: #f7f9fc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .pwd-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pwd-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            letter-spacing: 4px;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            user-select: all;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .copy-btn:active {
+            opacity: 0.8;
+        }
+
+        .countdown {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin: 15px 0 20px;
+        }
+
+        .countdown span {
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: #eee;
+            margin: 20px 0;
+        }
+
+        .test-section {
+            margin-top: 10px;
+        }
+
+        .test-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .timestamp-input {
+            flex: 1;
+            height: 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0 12px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .timestamp-input:focus {
+            border-color: #667eea;
+        }
+
+        .test-btn {
+            padding: 0 16px;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .test-result {
+            background: #f0f7ff;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            color: #333;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .test-result.show {
+            display: block;
+        }
+
+        .test-result .item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .test-result .item strong {
+            font-family: "Courier New", monospace;
+            color: #667eea;
+        }
+
+        .toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">动态密码生成器</div>
+        <div class="subtitle">基于时间的动态密码，每30分钟更新一次</div>
+
+        <!-- 查看答案密码 -->
+        <div class="pwd-card">
+            <div class="pwd-label">
+                <span>查看答案密码</span>
+                <button class="copy-btn" onclick="copyPwd('view')">复制</button>
+            </div>
+            <div class="pwd-value" id="viewPwd">--------</div>
+        </div>
+
+        <!-- 重新答题密码 -->
+        <div class="pwd-card">
+            <div class="pwd-label">
+                <span>重新答题密码</span>
+                <button class="copy-btn" onclick="copyPwd('retry')">复制</button>
+            </div>
+            <div class="pwd-value" id="retryPwd">--------</div>
+        </div>
+
+        <!-- 倒计时 -->
+        <div class="countdown">
+            距离下次更新还有 <span id="countdown">--:--</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 时间戳测试 -->
+        <div class="test-section">
+            <div class="test-title">指定时间戳测试</div>
+            <div class="input-row">
+                <input type="text" class="timestamp-input" id="tsInput" placeholder="输入UTC秒级时间戳" value="1750000000">
+                <button class="test-btn" onclick="testTimestamp()">生成</button>
+            </div>
+            <div class="test-result" id="testResult"></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">已复制到剪贴板</div>
+
+    <script>
+        // ========== 算法配置（与C++完全一致）==========
+        const SEED_S = 201314n;
+        const TIME_STEP = 1800n; // 30分钟 = 1800秒
+
+        // ========== 核心密码生成函数 ==========
+        function genViewPassword(utcTimestamp) {
+            const ts = BigInt(Math.floor(utcTimestamp));
+            const T = ts / TIME_STEP;
+
+            let tmp = (T * 7621n + SEED_S * 4513n) ^ (T << 3n);
+            tmp = tmp * 3131n ^ (SEED_S >> 2n);
+
+            const code = (tmp < 0n ? -tmp : tmp) % 100000000n;
+            return code.toString().padStart(8, '0');
+        }
+
+        function genRetryPassword(utcTimestamp) {
+            return genViewPassword(utcTimestamp).split('').reverse().join('');
+        }
+
+        // ========== 页面逻辑 ==========
+        let timer = null;
+
+        function updatePasswords() {
+            const now = Date.now() / 1000;
+            const viewPwd = genViewPassword(now);
+            const retryPwd = genRetryPassword(now);
+
+            document.getElementById('viewPwd').textContent = viewPwd;
+            document.getElementById('retryPwd').textContent = retryPwd;
+
+            updateCountdown(now);
+        }
+
+        function updateCountdown(nowSeconds) {
+            const step = Number(TIME_STEP);
+            const currentWindowStart = Math.floor(nowSeconds / step) * step;
+            const nextWindowStart = currentWindowStart + step;
+            const remainSeconds = Math.ceil(nextWindowStart - nowSeconds);
+
+            const mins = Math.floor(remainSeconds / 60);
+            const secs = remainSeconds % 60;
+            document.getElementById('countdown').textContent = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // 复制功能
+        function copyPwd(type) {
+            const text = type === 'view' 
+                ? document.getElementById('viewPwd').textContent
+                : document.getElementById('retryPwd').textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('已复制到剪贴板');
+            }).catch(() => {
+                // 降级方案
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                showToast('已复制到剪贴板');
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 1500);
+        }
+
+        // 时间戳测试
+        function testTimestamp() {
+            const input = document.getElementById('tsInput').value.trim();
+            const ts = parseInt(input);
+
+            if (isNaN(ts) || ts <= 0) {
+                showToast('请输入有效的时间戳');
+                return;
+            }
+
+            const viewPwd = genViewPassword(ts);
+            const retryPwd = genRetryPassword(ts);
+
+            const result = document.getElementById('testResult');
+            result.innerHTML = `
+                <div class="item">
+                    <span>查看答案密码：</span>
+                    <strong>${viewPwd}</strong>
+                </div>
+                <div class="item">
+                    <span>重新答题密码：</span>
+                    <strong>${retryPwd}</strong>
+                </div>
+            `;
+            result.classList.add('show');
+        }
+
+        // 初始化
+        function init() {
+            updatePasswords();
+            // 每秒刷新倒计时
+            timer = setInterval(updatePasswords, 1000);
+            // 默认执行一次测试
+            testTimestamp();
+        }
+
+        init();
+    </script>
+</body>
+</html>
