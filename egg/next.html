@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang=zh-CN oncontextmenu="self.event.returnValue=!1">
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<style type=text/css>
+        html {
+            overflow-x: initial !important
+        }
+
+        :root {
+            --bg-color: #fff;
+            --text-color: #333;
+            --select-text-bg-color: #c0e5ff;
+            --select-text-font-color: auto;
+            --monospace: "Lucida Console", Consolas, "Courier", monospace;
+            --title-bar-height: 20px
+        }
+
+        .mac-os-11 {
+            --title-bar-height: 28px
+        }
+
+        html {
+            font-size: 14px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased
+        }
+
+        h1,
+        h2 {
+            white-space: pre-wrap
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: auto;
+            inset: 0;
+            font-size: 1rem;
+            line-height: 1.42857;
+            overflow-x: hidden;
+            background: inherit
+        }
+
+        .in-text-selection,
+        ::selection {
+            text-shadow: none;
+            background: var(--select-text-bg-color);
+            color: var(--select-text-font-color)
+        }
+
+        #write {
+            margin: 0 auto;
+            height: auto;
+            width: inherit;
+            word-break: normal;
+            overflow-wrap: break-word;
+            position: relative;
+            white-space: normal;
+            overflow-x: visible;
+            padding-top: 36px
+        }
+
+        #write.first-line-indent p {
+            text-indent: 2em
+        }
+
+        #write.first-line-indent li p,
+        #write.first-line-indent p * {
+            text-indent: 0
+        }
+
+        #write.first-line-indent li {
+            margin-left: 2em
+        }
+
+        .for-image #write {
+            padding-left: 8px;
+            padding-right: 8px
+        }
+
+        body.typora-export {
+            padding-left: 30px;
+            padding-right: 30px
+        }
+
+        .typora-export .footnote-line,
+        .typora-export li,
+        .typora-export p {
+            white-space: pre-wrap
+        }
+
+        .typora-export .task-list-item input {
+            pointer-events: none
+        }
+
+        @media screen and (max-width:500px) {
+            body.typora-export {
+                padding-left: 0;
+                padding-right: 0
+            }
+
+            #write {
+                padding-left: 20px;
+                padding-right: 20px
+            }
+        }
+
+        #write li>figure:last-child {
+            margin-bottom: .5rem
+        }
+
+        #write ol,
+        #write ul {
+            position: relative
+        }
+
+        input[type=checkbox],
+        input[type=radio] {
+            line-height: normal;
+            padding: 0
+        }
+
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box
+        }
+
+        #write h1,
+        #write h2,
+        #write p,
+        #write pre {
+            width: inherit
+        }
+
+        #write h1,
+        #write h2,
+        #write p {
+            position: relative
+        }
+
+        p {
+            line-height: inherit
+        }
+
+        h1,
+        h2 {
+            break-after: avoid-page;
+            break-inside: avoid;
+            orphans: 4
+        }
+
+        p {
+            orphans: 4
+        }
+
+        h1 {
+            font-size: 2rem
+        }
+
+        h2 {
+            font-size: 1.8rem
+        }
+
+        .md-math-block,
+        .md-rawblock,
+        h1,
+        h2,
+        p {
+            margin-top: 1rem;
+            margin-bottom: 1rem
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .md-blockmeta {
+            color: #ccc;
+            font-weight: 700;
+            font-style: italic
+        }
+
+        sup.md-footnote {
+            padding: 2px 4px;
+            background-color: rgba(238, 238, 238, .7);
+            color: #555;
+            border-radius: 4px;
+            cursor: pointer
+        }
+
+        sup.md-footnote a,
+        sup.md-footnote a:hover {
+            color: inherit;
+            text-transform: inherit;
+            text-decoration: inherit
+        }
+
+        #write input[type=checkbox] {
+            cursor: pointer;
+            width: inherit;
+            height: inherit
+        }
+
+        figure {
+            overflow-x: auto;
+            margin: 1.2em 0;
+            max-width: calc(100% + 16px);
+            padding: 0
+        }
+
+        figure>table {
+            margin: 0
+        }
+
+        thead,
+        tr {
+            break-inside: avoid;
+            break-after: auto
+        }
+
+        thead {
+            display: table-header-group
+        }
+
+        div.hr:focus {
+            cursor: none
+        }
+
+        #write pre {
+            white-space: pre-wrap
+        }
+
+        #write.fences-no-line-wrapping pre {
+            white-space: pre
+        }
+
+        #write pre.ty-contain-cm {
+            white-space: normal
+        }
+
+        #write .footnote-line {
+            white-space: pre-wrap
+        }
+
+        @media print {
+
+            body,
+            html {
+                border: 1px solid transparent;
+                height: 99%;
+                break-after: avoid;
+                break-before: avoid;
+                font-variant-ligatures: no-common-ligatures
+            }
+
+            #write {
+                margin-top: 0;
+                border-color: transparent !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important
+            }
+
+            .typora-export * {
+                -webkit-print-color-adjust: exact
+            }
+
+            .typora-export #write {
+                break-after: avoid
+            }
+
+            .typora-export #write::after {
+                height: 0
+            }
+
+            .is-mac table {
+                break-inside: avoid
+            }
+
+            #write>p:nth-child(1) {
+                margin-top: 0
+            }
+
+            .typora-export-show-outline .typora-export-sidebar {
+                display: none
+            }
+
+            figure {
+                overflow-x: visible
+            }
+        }
+
+        pre.md-meta-block {
+            font-size: .8rem;
+            min-height: .8rem;
+            white-space: pre-wrap;
+            background: #ccc;
+            display: block;
+            overflow-x: hidden
+        }
+
+        p>.md-image:only-child:not(.md-img-error) img,
+        p>img:only-child {
+            display: block;
+            margin: auto
+        }
+
+        #write.first-line-indent p>.md-image:only-child:not(.md-img-error) img {
+            left: -2em;
+            position: relative
+        }
+
+        p>.md-image:only-child {
+            display: inline-block;
+            width: 100%
+        }
+
+        #write .MathJax_Display {
+            margin: .8em 0 0
+        }
+
+        .md-toc {
+            min-height: 3.58rem;
+            position: relative;
+            font-size: .9rem;
+            border-radius: 10px
+        }
+
+        .md-toc-h1 .md-toc-inner {
+            margin-left: 0;
+            font-weight: 700
+        }
+
+        .md-toc-h2 .md-toc-inner {
+            margin-left: 2em
+        }
+
+        a.md-toc-inner {
+            font-size: inherit;
+            font-style: inherit;
+            font-weight: inherit;
+            line-height: inherit
+        }
+
+        .footnote-line a:not(.reversefootnote) {
+            color: inherit
+        }
+
+        .reversefootnote {
+            font-family: ui-monospace, sans-serif
+        }
+
+        .md-attr {
+            display: none
+        }
+
+        .md-fn-count::after {
+            content: "."
+        }
+
+        code,
+        pre,
+        samp,
+        tt {
+            font-family: var(--monospace)
+        }
+
+        kbd {
+            margin: 0 .1em;
+            padding: .1em .6em;
+            font-size: .8em;
+            color: #242729;
+            background: #fff;
+            border: 1px solid #adb3b9;
+            border-radius: 3px;
+            box-shadow: rgba(12, 13, 14, .2) 0 1px 0, #fff 0 0 0 2px inset;
+            white-space: nowrap;
+            vertical-align: middle
+        }
+
+        .md-comment {
+            color: #a27f03;
+            opacity: .6;
+            font-family: var(--monospace)
+        }
+
+        code {
+            text-align: left;
+            vertical-align: initial
+        }
+
+        a.md-print-anchor {
+            white-space: pre !important;
+            border-width: initial !important;
+            border-style: none !important;
+            border-color: initial !important;
+            display: inline-block !important;
+            position: absolute !important;
+            width: 1px !important;
+            right: 0 !important;
+            outline: 0 !important;
+            background: 0 0 !important;
+            text-decoration: initial !important;
+            text-shadow: initial !important
+        }
+
+        .os-windows.monocolor-emoji .md-emoji {
+            font-family: "Segoe UI Symbol", sans-serif
+        }
+
+        .md-diagram-panel>svg {
+            max-width: 100%
+        }
+
+        [lang=flow] svg,
+        [lang=mermaid] svg {
+            max-width: 100%;
+            height: auto
+        }
+
+        [lang=mermaid] .node text {
+            font-size: 1rem
+        }
+
+        .md-html-inline .md-plain,
+        .md-html-inline strong,
+        mark .md-inline-math,
+        mark strong {
+            color: inherit
+        }
+
+        .md-expand mark .md-meta {
+            opacity: .3 !important
+        }
+
+        mark .md-meta {
+            color: #000
+        }
+
+        @media print {
+
+            .typora-export h1,
+            .typora-export h2 {
+                break-inside: avoid
+            }
+        }
+
+        .md-diagram-panel .messageText {
+            stroke: none !important
+        }
+
+        .md-diagram-panel .start-state {
+            fill: var(--node-fill)
+        }
+
+        .md-diagram-panel .edgeLabel rect {
+            opacity: 1 !important
+        }
+
+        .md-fences.md-fences-math {
+            font-size: 1em
+        }
+
+        .md-fences-advanced:not(.md-focus) {
+            padding: 0;
+            white-space: nowrap;
+            border: 0
+        }
+
+        .md-fences-advanced:not(.md-focus) {
+            background: inherit
+        }
+
+        .typora-export-show-outline .typora-export-content {
+            max-width: 1440px;
+            margin: auto;
+            display: flex;
+            flex-direction: row
+        }
+
+        .typora-export-sidebar {
+            width: 300px;
+            font-size: .8rem;
+            margin-top: 80px;
+            margin-right: 18px
+        }
+
+        .typora-export-show-outline #write {
+            --webkit-flex: 2;
+            flex: 2 1 0
+        }
+
+        .typora-export-sidebar .outline-content {
+            position: fixed;
+            top: 0;
+            max-height: 100%;
+            overflow: hidden auto;
+            padding-bottom: 30px;
+            padding-top: 60px;
+            width: 300px
+        }
+
+        @media screen and (max-width:1024px) {
+
+            .typora-export-sidebar,
+            .typora-export-sidebar .outline-content {
+                width: 240px
+            }
+        }
+
+        @media screen and (max-width:800px) {
+            .typora-export-sidebar {
+                display: none
+            }
+        }
+
+        .outline-h1>.outline-item {
+            padding-left: 0
+        }
+
+        .outline-h2>.outline-item {
+            padding-left: 1em
+        }
+
+        :root {
+            --side-bar-bg-color: #fafafa;
+            --control-text-color: #777
+        }
+
+        @include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased
+        }
+
+        body {
+            font-family: "Open Sans", "Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+            color: #333;
+            line-height: 1.6
+        }
+
+        #write {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 30px;
+            padding-bottom: 100px
+        }
+
+        @media only screen and (min-width:1400px) {
+            #write {
+                max-width: 1024px
+            }
+        }
+
+        @media only screen and (min-width:1800px) {
+            #write {
+                max-width: 1200px
+            }
+        }
+
+        #write>ul:first-child,
+        #write>ol:first-child {
+            margin-top: 30px
+        }
+
+        h1,
+        h2 {
+            position: relative;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            cursor: text
+        }
+
+        h1:hover a.anchor,
+        h2:hover a.anchor,
+        {
+        text-decoration: none
+        }
+
+        h1 {
+            font-size: 2.25em;
+            line-height: 1.2;
+            border-bottom: 1px solid #eee
+        }
+
+        h2 {
+            font-size: 1.75em;
+            line-height: 1.225;
+            border-bottom: 1px solid #eee
+        }
+
+        p {
+            margin: .8em 0
+        }
+
+        li>ol,
+        li>ul {
+            margin: 0 0
+        }
+
+        hr {
+            height: 2px;
+            padding: 0;
+            margin: 16px 0;
+            background-color: #e7e7e7;
+            border: 0 none;
+            overflow: hidden;
+            box-sizing: content-box
+        }
+
+        li p.first {
+            display: inline-block
+        }
+    </style>
+        <script>(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i + "?ref=bwt"; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y) })(window, document, "clarity", "script", "v60r6kypoj");</script>
+
+<title>《绫结龙心》</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='绫结龙心'><span>《绫结龙心》</span></h1><h2 id='第一章龙宫夜宴'><span>第一章：龙宫夜宴</span></h2><p><span>东海龙宫的水晶琉璃宴会大殿内，水光潋滟，珠贝生辉。夜宴正酣，龙族宾客觥筹交错，欢声笑语回荡在华丽的水晶穹顶之下。然而在这热闹非凡的场合中，角落里却坐着两位特殊的客人——敖丙与哪吒。</span></p><p><span>敖丙一身白衣，气质温润如玉，与周围龙族宾客的华贵服饰相得益彰，却又隐隐透出一丝疏离。而他身旁的哪吒，则是一身火红，红发飞扬，与这水蓝色的龙宫显得格格不入。更引人注目的是，哪吒作为&quot;魔丸&quot;转世投胎的身份，让周围龙族投来的目光中夹杂着审视、警惕与一丝不易察觉的敌意。</span></p><p><span>&quot;丙儿，你终于肯带朋友来龙宫做客了。&quot;龙王端坐主位，脸上挂着和善的笑容，但那笑容中却藏着几分难以捉摸的深意。</span></p><p><span>敖丙微微躬身，恭敬地回应：&quot;父王，哪吒是我的朋友，自然要让他见识一下我们东海的盛景。&quot;</span></p><p><span>哪吒懒洋洋地靠在椅背上，随手拿起一杯酒饮了一口，眉头微皱：&quot;这酒淡得像水，还不如我们陈塘关的米酒有劲道。&quot;</span></p><p><span>周围的龙族宾客闻言，纷纷投来不满的目光。敖丙轻咳一声，低声对哪吒说：&quot;注意言辞，这里是龙宫。&quot;</span></p><p><span>&quot;怕什么！&quot;哪吒提高音量，&quot;我哪吒怕过谁？不就是一群龙嘛，有什么了不起的！&quot;</span></p><p><span>敖丙无奈地叹了口气，只能向周围的龙族宾客投去歉意的眼神。他知道哪吒虽然嘴上不饶人，但心地其实不坏，只是不擅长应对这种场合。</span></p><p><span>宴会进行到一半，龙王笑盈盈地命人端上几坛特殊的酒：&quot;各位贵客，这是我们龙宫的珍酿——&#39;真心酒&#39;。据说饮下此酒，会让人吐露内心最真实的想法。今日难得有贵客临门，不如我们共饮几杯，如何？&quot;</span></p><p><span>龙王将目光投向哪吒，笑容中带着一丝不易察觉的挑衅。哪吒自然明白这酒不简单，但看了一眼敖丙，他还是豪迈地站起身来：&quot;这有什么不敢的！我哪吒行得正坐得直，有什么不能说的！&quot;</span></p><p><span>敖丙想要阻止，但已经来不及了。哪吒接过酒坛，仰头一饮而尽，辛辣的酒液瞬间灼烧着他的喉咙。他强忍着不适，又接连饮下几杯，直到脸颊泛红，眼神开始迷离。</span></p><p><span>&quot;丙儿，你看，我哪吒怕过什么？&quot;哪吒摇摇晃晃地站起身，红发在灯光下显得格外耀眼。</span></p><p><span>敖丙连忙扶住他，担心地问：&quot;你没事吧？&quot;</span></p><p><span>&quot;我没事！&quot;哪吒甩开敖丙的手，却一个趔趄差点摔倒，还是被敖丙及时扶住。哪吒借着酒劲，突然凑近敖丙耳边，低声笑道：&quot;你知道吗？其实我挺喜欢这里的，尤其是有你陪着。&quot;</span></p><p><span>敖丙心中一震，还没来得及回应，哪吒已经退开，重新坐回座位上，眼神开始变得涣散。</span></p><p><span>龙王满意地看着这一幕，心中暗自得意。他知道这&quot;真心酒&quot;的后劲极大，不出片刻，哪吒就会醉得不省人事，到时候必定会在龙宫出丑，让敖丙难堪。</span></p><p><span>然而，敖丙只是平静地看着这一切，心中早已有了计较。他了解哪吒的酒量，虽然这酒不寻常，但以哪吒的体质，应该不至于立刻醉倒。</span></p><p><span>果然，几杯酒下肚后，哪吒虽然面色潮红，眼神迷离，但神志还算清醒。他开始觉得有些头晕目眩，眼前的景象也开始摇晃起来，但他仍然强撑着，不想在敖丙面前出丑。</span></p><p><span>&quot;丙儿，我有点晕...&quot;哪吒的声音变得含糊不清。</span></p><p><span>敖丙连忙扶住他，低声说：&quot;我们差不多该回去了。&quot;</span></p><p><span>哪吒点点头，任由敖丙扶着自己。在众人复杂的目光中，两人离开了宴会大殿，走向敖丙的寝殿。</span></p><h2 id='第二章醉意朦胧'><span>第二章：醉意朦胧</span></h2><p><span>随着哪吒的脚步越来越虚浮，敖丙不得不更加用力地支撑着他的身体。水晶走廊上，鲛人珠散发着柔和的光芒，照亮了两人的身影。哪吒的头靠在敖丙的肩上，呼吸间带着酒气，眼神迷离。</span></p><p><span>&quot;丙儿...&quot;哪吒含糊地叫了一声，声音中带着一丝依赖。</span></p><p><span>&quot;我在这里。&quot;敖丙轻声回应，心中涌起一阵暖意。虽然哪吒总是表现得桀骜不驯，但在醉酒后，他卸下了所有防备，显露出最真实的一面。</span></p><p><span>&quot;他们都不喜欢我...&quot;哪吒突然说道，声音中带着一丝委屈，&quot;只有你不嫌弃我。&quot;</span></p><p><span>敖丙心中一紧，轻声说：&quot;他们不了解你，但我会。&quot;</span></p><p><span>哪吒抬起头，迷离的眼睛看着敖丙：&quot;真的吗？&quot;</span></p><p><span>&quot;真的。&quot;敖丙坚定地点头。</span></p><p><span>哪吒的动作突然变得有些奇怪。他不知何时已经悄悄抽出了腰间的混天绫，那火红的绫子在昏暗的光线下显得格外醒目。他借着酒意，在桌案下悄悄将混天绫绕上了敖丙的龙尾，打了一个松松的结，自己却浑然不觉。</span></p><p><span>&quot;别动，跑了怎么办...&quot;哪吒含糊地嘀咕着，声音越来越小。</span></p><p><span>敖丙低头一看，顿时明白了发生了什么。他无奈地笑了笑，任那红绫缠着自己的尾巴。他知道，哪吒这是在醉酒状态下无意识的举动，醒来后肯定会懊恼不已。</span></p><p><span>&quot;丙儿，你知道吗？&quot;哪吒的声音突然变得清晰了一些，&quot;我总觉得你会离开我...就像我娘离开我一样...&quot;</span></p><p><span>敖丙心中一震，轻声说：&quot;我不会离开你的。&quot;</span></p><p><span>&quot;真的吗？&quot;哪吒抬起头，眼睛中闪烁着泪光，&quot;那你答应我，永远不要离开我。&quot;</span></p><p><span>&quot;我答应你。&quot;敖丙郑重地点头，心中涌起一阵心疼。他从未想过，看似无所畏惧的哪吒，内心竟如此脆弱。</span></p><p><span>宴会散场后，敖丙扶着脚步虚浮的哪吒回寝殿。一路上，哪吒靠在他肩上，反复念叨着：&quot;龙尾巴...我系了结...别跑...&quot;</span></p><p><span>敖丙哭笑不得，只能耐心地听着。他知道哪吒这是醉话，但还是一一记在了心里。</span></p><p><span>终于，两人来到了敖丙的寝殿。这是一间位于龙宫深处的珊瑚殿，四周墙壁由珍贵的珊瑚砌成，散发着柔和的粉红色光芒。殿内有一张巨大的珊瑚榻，上面铺着柔软的丝绸被褥。</span></p><p><span>敖丙小心翼翼地将哪吒放在珊瑚榻上，哪吒却像八爪鱼一样紧紧抱住敖丙的手臂，不肯松开。</span></p><p><span>&quot;别走...&quot;哪吒含糊地说，&quot;陪我...&quot;</span></p><p><span>敖丙无奈地叹了口气，只能坐在床边，任由哪吒抱着。他轻轻抚摸着哪吒的红发，心中涌起一阵复杂的情绪。</span></p><p><span>&quot;丙儿，你真好...&quot;哪吒在睡梦中喃喃自语，&quot;比陈塘关所有人都好...&quot;</span></p><p><span>敖丙心中一暖，轻声回应：&quot;我也是，哪吒。&quot;</span></p><p><span>哪吒似乎听见了他的话，嘴角微微上扬，安心地睡去了。敖丙小心翼翼地想要抽出自己的手臂，却发现哪吒抱得实在太紧，根本无法挣脱。他只好任由哪吒抱着，自己则坐在床边，静静地看着哪恬睡的容颜。</span></p><p><span>夜深了，殿内只剩下哪吒均匀的呼吸声和窗外海浪的轻拍声。敖丙看着哪吒熟睡的脸庞，心中涌起一阵前所未有的情感。他从未想过，自己会对一个人类产生如此深厚的感情，更何况是这个被龙族视为异类的&quot;魔丸&quot;转世。</span></p><h2 id='第三章结的秘密'><span>第三章：结的秘密</span></h2><p><span>夜深人静，敖丙坐在珊瑚榻边，静静地看着哪吒熟睡的脸庞。哪吒的呼吸均匀而平稳，红发在鲛人珠的光芒下显得格外柔软。敖丙轻轻伸出手，想要拂去哪吒额前的发丝，却又在半空中停住，生怕惊扰了他的好梦。</span></p><p><span>就在这时，敖丙突然感觉自己的龙尾被什么东西轻轻拉扯了一下。他低头一看，发现哪吒的混天绫仍然紧紧缠在自己的尾巴上，打了一个松松的结。敖丙原本想解开这个结，以免哪吒醒来后尴尬，但不知为何，他却犹豫了。</span></p><p><span>他凝视着那火红的绫子，突然发现绫子的边角处似乎绣着什么。敖丙小心翼翼地凑近，借着鲛人珠的光芒，他看见红绫的边角处绣着一行细密的小字，针脚虽然笨拙却异常认真：</span></p><p><span>&quot;怕你游远，先系个结。&quot;</span></p><p><span>敖丙的呼吸骤然一滞，指尖轻轻抚过那行字，心头像是被什么撞了一下。原来哪吒醉酒时说的胡话，竟是藏在心底最深处的心事。他此刻才明白，这不是玩闹，而是一句笨拙的告白。</span></p><p><span>敖丙的心中涌起一阵莫名的悸动。他一直以为哪吒对他的亲近只是孩童般的依赖，从未想过在这看似随意的举动背后，竟藏着如此深厚的情感。他摩挲着那个结，低声唤道：&quot;哪吒，你醒着吗？&quot;</span></p><p><span>哪吒迷迷糊糊地翻了个身，却伸手捏住他的尾巴尖，含糊道：&quot;龙尾巴上有我的结...你游不远的...&quot;</span></p><p><span>敖丙心中震荡，眼眶微热。他从未想过，看似桀骜不驯的哪吒，竟会说出如此温柔的话语。他俯身靠近哪吒耳边，轻声道：&quot;本就没打算游远，傻不傻。&quot;</span></p><p><span>那声音轻柔得如同海风，却让哪吒的身体微微一颤。他似乎听见了，又似乎没听见，只是将敖丙的尾巴抱得更紧了些。</span></p><p><span>敖丙没有再说话，只是静静地坐在床边，感受着混天绫缠绕在自己尾巴上的温暖。他从未想过，自己会如此在意一个人类的情感，更何况是这个被龙族视为异类的&quot;魔丸&quot;转世。</span></p><p><span>夜越来越深，敖丙看着哪吒熟睡的脸庞，心中涌起一阵前所未有的情感。他知道，从这一刻起，他与哪吒之间的关系已经发生了微妙的变化。那看似简单的混天绫结，却成了两人之间最真挚的纽带。</span></p><p><span>窗外，海浪轻轻拍打着珊瑚礁，发出温柔的低语。敖丙闭上眼睛，感受着这一刻的宁静与美好。他知道，无论未来如何，这一刻的温暖将永远珍藏在他的心中。</span></p><h2 id='第四章永不褪色的誓言'><span>第四章：永不褪色的誓言</span></h2><p><span>晨光透过珊瑚殿的窗户，洒在混天绫上，那火红的绫子在晨光中显得格外醒目。哪吒缓缓睁开眼睛，宿醉的头痛让他不禁皱了皱眉。他习惯性地想要坐起身，却发现自己的手臂被什么东西压着。</span></p><p><span>低头一看，哪吒惊讶地发现自己的混天绫竟然还缠在敖丙的龙尾上，打了一个松松的结。他的脸颊瞬间烧红，想要趁敖丙未醒偷偷解开这个结，却被敖丙一把按住了手。</span></p><p><span>&quot;别动。&quot;敖丙的声音带着刚睡醒的沙哑，眼角含着笑意，&quot;既然说了怕我游远，这结就留着吧，反正我认了。&quot;</span></p><p><span>哪吒的脸更红了，嘴硬道：&quot;谁怕你游远！我是怕你跑了没人陪我打架！&quot;</span></p><p><span>敖丙轻笑一声，没有拆穿他的谎言。他小心翼翼地解开混天绫，却又重新将它系成一个更工整的结，动作温柔而专注。哪吒看着敖丙认真的侧脸，心中涌起一阵莫名的悸动。</span></p><p><span>&quot;好了。&quot;敖丙系好结，抬起头看着哪吒，&quot;这个结，代表着我们之间的约定。&quot;</span></p><p><span>哪吒撇撇嘴，故作不在意地说：&quot;什么约定，我才没答应什么！&quot;</span></p><p><span>敖丙轻笑，伸手轻轻捏了捏哪吒的脸颊：&quot;嘴硬的小家伙。&quot;</span></p><p><span>哪吒拍开敖丙的手，却发现自己的手不知何时已经握住了敖丙的指尖。两人相视一笑，所有的情感都在这一刻不言而喻。</span></p><p><span>&quot;丙儿，&quot;哪吒突然开口，声音中带着一丝认真，&quot;你真的不嫌弃我是&#39;魔丸&#39;转世吗？&quot;</span></p><p><span>敖丙正色道：&quot;我从不认为这有什么值得嫌弃的。你是我哪吒，这就足够了。&quot;</span></p><p><span>哪吒心中一暖，紧紧握住敖丙的手：&quot;那我们以后，就是最好的朋友了！&quot;</span></p><p><span>敖丙点点头，眼中闪烁着温柔的光芒：&quot;当然，最好的朋友。&quot;</span></p><p><span>两人相视一笑，所有的情感都在这一刻不言而喻。窗外，海浪轻轻拍打着珊瑚礁，发出温柔的低语，仿佛在为这段纯真的感情伴奏。</span></p><p><span>从此，东海深处多了一道奇景——一条红绫轻轻系着白龙之尾，随波荡漾，无人知晓那结上还绣着一行小字：&quot;怕你游远，先系个结。&quot;像是永不褪色的誓言，见证着两个少年之间最真挚的情感。</span></p><p><span>哪吒和敖丙的故事，才刚刚开始。他们之间的情感，如同东海的潮汐，时而平静，时而汹涌，却永远不会退去。无论未来如何，这一刻的温暖与美好，将永远珍藏在他们心中。</span></p><p style="color:#ddd">AI生成 GLM 4.5 Air 7719 tokens</p></div></div>
+
+</body>
+</html>
