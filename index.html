@@ -20,212 +20,176 @@
     <meta name="keywords" content="msdsl520,茂盛的森林520,茂盛的森林主页，茂盛的森林毕业季">
     <title>茂盛的森林的毕业季</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background: #ebecef;
-            color: #333
+        body{
+            font-family:Arial, sans-serif;
+            line-height:1.6;
+            margin:0;
+            padding:20px;
+            background:#ebecef;
+            color:#333
         }
-
-        a {
-            text-decoration: none;
-            color: #0066cc
+        a{
+            text-decoration:none;
+            color:#0066cc
         }
-
-        h2,
-        h3 {
-            color: #222
+        h2,h3{
+            color:#222
         }
-
-        .ui,
-        .uip {
-            border-radius: 20px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #fff;
-            padding: 15px;
-            margin-bottom: 20px
+        .ui,.uip{
+            border-radius:20px;
+            background:#ebecef;
+            box-shadow:10px 10px 21px #8f9092, -10px -10px 21px #fff;
+            padding:15px;
+            margin-bottom:20px
         }
-
-        .ui {
-            border-radius: 20px
+        .uiimg{
+            max-width:100%;
+            height:auto;
+            border-radius:15px
         }
-
-        .uiimg {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px
-        }
-
-        .fcarz {
-            display: flex;
+        .fcarz{
+            display:flex;
             flex-wrap: wrap;
-            gap: 15px;
-            padding: 10px
+            gap:15px;
+            padding:10px
         }
-
-        .fcarz .uip {
-            flex: 1;
-            min-width: 120px;
-            text-align: center
+        .fcarz .uip{
+            flex:1;
+            min-width:120px;
+            text-align:center
         }
-
-        .ctir {
-            max-width: 1200px;
-            margin: 0 auto
+        .ctir{
+            max-width:1200px;
+            margin:0 auto
         }
-
-        .alst {
-            gap: 10px;
-            border-radius: 20px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #fff;
-            margin-bottom: 20px
+        .alst{
+            gap:10px;
+            border-radius:20px;
+            background:#ebecef;
+            box-shadow:10px 10px 21px #8f9092, -10px -10px 21px #fff;
+            margin-bottom:20px
         }
-
-        .alst {
-            padding: 8px 15px;
-            transition: background 0.3s
+        .alst{
+            padding:8px 15px;
+            transition:background 0.3s
         }
-
-        @media(min-width:768px) {
+        @media(min-width:768px){
             body {
-                padding: 30px
+                padding:30px
             }
-
-            .ui,
-            .uip {
-                padding: 20px
+            .ui,.uip{
+                padding:20px
             }
-
-            .fcarz {
-                display: flex;
-                gap: 20px
+            .fcarz{
+                display:flex;
+                gap:20px
             }
-
-            .fcarz.ui,
-            .fcarz.uip {
-                flex: 1
+            .fcarz.ui,.fcarz.uip{
+                flex:1 
             }
         }
-
-        input,
-        textarea {
-            width: 100%;
-            box-sizing: border-box;
-            resize: vertical;
-            background-color: #f8f8f8;
+        input,textarea{
+            width:100%;
+            box-sizing:border-box;
+            resize:vertical;
+            background-color:#f8f8f8;
             border: none
         }
-
-        #sbtn {
-            width: 100%;
-            border-radius: 20px;
-            background: #87CEEB;
-            box-shadow: 5px 5px 10px #6BA3C7, -5px -5px 10px #A7E5FF;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-            &:hover {
-                transform: scale(1.02);
-                background: #76b6de;
-                box-shadow: 5px 5px 10px #76b6de, -5px -5px 10px #A7E5FF
+        #sbtn{
+            width:100%;
+            border-radius:20px;
+            background:#87CEEB;
+            box-shadow:5px 5px 10px #6BA3C7,-5px -5px 10px #A7E5FF;
+            padding:10px;
+            border:none;
+            cursor:pointer;
+            font-size:16px;
+            transition:transform 0.3s ease,box-shadow 0.3s ease;
+            &:hover{
+                transform:scale(1.02);
+                background:#76b6de;
+                box-shadow:5px 5px 10px #76b6de,-5px -5px 10px #A7E5FF
             }
         }
-
-        @media(min-width:1024px) {
-            body {
-                padding: 40px
+        @media(min-width:1024px){
+            body{
+                padding:40px
             }
-
-            .ctir {
-                display: grid;
-                grid-template-columns: 3fr 1fr;
-                gap: 30px
+            .ctir{
+                display:grid;
+                grid-template-columns:3fr 1fr;
+                gap:30px
             }
-
-            .mctnt {
-                grid-column: 1
+            .mctnt{
+                grid-column:1
             }
-
-            .sbar {
-                grid-column: 2
+            .sbar{
+                grid-column:2
             }
         }
-
-        .imgui {
-            border-radius: 50px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #fff
+        .imgui{
+            border-radius:50px;
+            background:#ebecef;
+            box-shadow:10px 10px 21px #8f9092, -10px -10px 21px #fff
         }
-
-        .atcl {
-            font-size: 16px;
-            line-height: 1.8;
+        .atcl{
+            font-size:16px;
+            line-height:1.8;
             display: block;
-            padding: 5px 0
+            padding:5px 0
         }
-
-        .pjcar {
-            display: flex;
-            flex-direction: column;
-            gap: 15px
+        .pjcar{
+            display:flex;
+            flex-direction:column;
+            gap:15px
         }
-
-        .sfcar {
-            display: flex;
-            align-items: center;
-            border-radius: 20px;
-            background: #ebecef;
-            box-shadow: 10px 10px 21px #8f9092, -10px -10px 21px #fff;
-            padding: 15px;
-            margin-bottom: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease
+        .sfcar{
+            display:flex;
+            align-items:center;
+            border-radius:20px;
+            background:#ebecef;
+            box-shadow:10px 10px 21px #8f9092, -10px -10px 21px #fff;
+            padding:15px;
+            margin-bottom:15px;
+            transition:transform 0.3s ease,box-shadow 0.3s ease
         }
-
         .sfcar:hover {
-            transform: translateY(-3px);
-            box-shadow: 12px 12px 25px #8f9092, -12px -12px 25px #fff
+            transform:translateY(-3px);
+            box-shadow:12px 12px 25px #8f9092, -12px -12px 25px #fff
         }
-
         .sfcar img {
-            width: 80px;
-            height: 80px;
-            border-radius: 15px;
-            margin-right: 15px;
-            object-fit: cover
+            width:80px;
+            height:80px;
+            border-radius:15px;
+            margin-right:15px;
+            object-fit:cover
         }
-
         .sfcct {
-            flex: 1
+            flex:1
         }
-
         .sfnam {
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 5px
+            font-size:18px;
+            font-weight:bold;
+            color:#000;
+            margin-bottom:5px
         }
-
         .sfdec {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5
+            font-size:14px;
+            color:#666;
+            line-height:1.5
         }
     </style>
     <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","v60r6kypoj");</script>
 </head>
-
 <body>
   <div class="ctir">
-        <header><a type="button" onclick="hello()">
-                <div class="" style="text-align:center;"><img class="imgui" width="184" height="184" src="pict.png"
-                        alt="个人头像"></div>
-            </a></header><br>
+        <header>
+            <div class="" style="text-align:center;">
+                <a type="button" onclick="hello()">
+                    <img class="imgui" width="184" height="184" src="pict.png" alt="个人头像">
+                </a>
+            </div>
+        </header><br>
         <div class="ui"
             style="background:linear-gradient(to right,#46a1ce,#228fca);display:flex;align-items:center;gap:15px;"><img
                 src="/czbiye/cover.png" width="64" alt="歌曲封面">
@@ -236,13 +200,14 @@
         <br>
         <div class=ui>
             <h2>问卷调查</h2>
-            <h5>你喜欢我吗？(点击选项进行投票)</h5><a href="https://vote.saobby.com/v/c1SMtjtz/0">喜欢(❤ ω ❤)</a> <img
-                src="https://vote.saobby.com/i/c1SMtjtz/0"><br><br><a
-                href="https://vote.saobby.com/v/c1SMtjtz/1">算了吧~</a> <img src="https://vote.saobby.com/i/c1SMtjtz/1">
+            <h5>你喜欢我吗？(点击选项进行投票)</h5>
+            <a href="https://vote.saobby.com/v/c1SMtjtz/0">喜欢(❤ ω ❤)</a><img src="https://vote.saobby.com/i/c1SMtjtz/0"><br><br>
+            <a href="https://vote.saobby.com/v/c1SMtjtz/1">算了吧~</a><img src="https://vote.saobby.com/i/c1SMtjtz/1">
             <p class="sfdec">投票服务由Saobby支持</p>
         </div>
         <main class="mctnt">
-            <div class="ui"><img src="/biyelogo.png" height="35px">
+            <div class="ui">
+                <h2>个人介绍</h2>
                 <p>新高一学生，即将开学！<br>愿你带着初中的纯真与热忱，奔赴下一场山海。<br>前路或许有风雨，但请记得：每一次挑战都是成长的勋章，每一份坚持都会让梦想更近一步。<br>愿你的行囊里装满勇气与智慧，眼里永远有星辰大海，脚下踏出属于自己的璀璨轨迹。<br>未来无论选择何方，愿你始终心怀热爱，在热爱的领域闪闪发光，活成自己最骄傲的模样！<br>
                 <h5>加油，高中生！</h5>
                 </p>
@@ -267,14 +232,12 @@
             </div>
             <div class="ui">
                 <h2>我的软件</h2>
-                <div class="pjcar"><a href="/soft/clock/" target="_blank" class="sfcar"><img src="/soft/clock/icon.png"
-                            alt="番茄时钟">
+                <div class="pjcar"><a href="/soft/clock/" target="_blank" class="sfcar"><img src="/soft/clock/icon.png"alt="番茄时钟">
                         <div class="sfcct">
                             <div class="sfnam">番茄时钟</div>
                             <div class="sfdec">一个简约的番茄钟工具</div>
                         </div>
-                    </a><a href="/soft/mdtest/" target="_blank" class="sfcar"><img src="/soft/mdtest/icon-big.png"
-                            alt="运势测算">
+                    </a><a href="/soft/mdtest/" target="_blank" class="sfcar"><img src="/soft/mdtest/icon-big.png" alt="运势测算">
                         <div class="sfcct">
                             <div class="sfnam">运势测算</div>
                             <div class="sfdec">没什么用的数学……（毫无科学依据）</div>

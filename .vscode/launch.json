@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // {
+    //   "type": "msedge",
+    //   "request": "attach",
+    //   "name": "Attach to browser",
+    //   "port": 9222
+    // }, 
+    {
+      "type": "editor-browser",
+      "request": "launch",
+      "name": "Launch my cool app",
+    //   "url": "http://localhost:8080/"
+      "url": "${file}"
+    }
+  ]
+   
+  
+}
+
