@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" type="image/png" href="https://msdsl520.github.io/logo.png">
+    <link rel="shortcut icon" type="image/png" href="https://msdsl520.cc.cd/logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="茂盛的森林的毕业季">
-    <meta name="twitter:image" content="https://msdsl520.github.io/cover.png">
+    <meta name="twitter:image" content="https://msdsl520.cc.cd/qixi.png">
     <meta name="twitter:description" content="一个平凡的初中生，建起了一个不平凡的网站。未来无论选择何方，愿你始终心怀热爱，在热爱的领域闪闪发光，活成自己最骄傲模样！加油，毕业生！">
     <meta property="og:title" content="茂盛的森林的毕业季">
-    <meta property="og:image" content="https://msdsl520.github.io/cover.png">
+    <meta property="og:image" content="https://msdsl520.cc.cd/qixi.png">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://msdsl520.github.io/">
+    <meta property="og:url" content="https://msdsl520.cc.cd/">
     <meta property="og:image:width" content="1500">
     <meta property="og:image:height" content="1500">
     <meta name="robots" content="max-image-preview:large">
@@ -186,36 +186,39 @@
         <header>
             <div class="" style="text-align:center;">
                 <a type="button" onclick="hello()">
-                    <img class="imgui" width="184" height="184" src="pict.png" alt="个人头像">
+                    <img class="imgui" width="184" height="184" src="qixi.webp" alt="个人头像">
                 </a>
             </div>
         </header><br>
         <div class="ui"
-            style="background:linear-gradient(to right,#46a1ce,#228fca);display:flex;align-items:center;gap:15px;"><img
-                src="/czbiye/cover.png" width="64" alt="歌曲封面">
+            style="background:linear-gradient(to right,#46a1ce,#228fca);display:flex;align-items:center;gap:15px;">
+            <img src="/czbiye/cover.png" width="64" alt="歌曲封面">
             <div style="display:flex;flex-direction:column;"><b style="font-size:22px;">逐梦海洋</b>
                 <a href="https://www.bilibili.com/video/BV1oHjU6gEKK">前往bilibili播放</a>
             </div>
         </div>
         <br>
         <div class=ui>
-            <h2>问卷调查</h2>
-            <h5>你喜欢我吗？(点击选项进行投票)</h5>
+            <img src="qixilogo.webp" height="40">
+            <h4>祝各位七夕节快乐💌</h4>
+            <p>七夕佳节至，鹊桥架星河。在这个充满浪漫与思念的日子里，愿你和心爱的人如牛郎织女般情深意重，跨越时空的距离，珍惜每一次相聚的时光。</p>
+            <p>愿你们的爱如银河般璀璨，如星辰般永恒。无论岁月如何流转，愿你们的心始终紧紧相依，共同书写属于你们的美好故事。</p>
+            <p>祝七夕快乐，幸福美满！</p>
+            <h5>问卷：你喜欢我吗？</h5>
             <a href="https://vote.saobby.com/v/c1SMtjtz/0">喜欢(❤ ω ❤)</a><img src="https://vote.saobby.com/i/c1SMtjtz/0"><br><br>
             <a href="https://vote.saobby.com/v/c1SMtjtz/1">算了吧~</a><img src="https://vote.saobby.com/i/c1SMtjtz/1">
-            <p class="sfdec">投票服务由Saobby支持</p>
         </div>
         <main class="mctnt">
-            <div class="ui">
+            <div class="ui" style="display:none;">
                 <h2>个人介绍</h2>
                 <p>新高一学生，即将开学！<br>愿你带着初中的纯真与热忱，奔赴下一场山海。<br>前路或许有风雨，但请记得：每一次挑战都是成长的勋章，每一份坚持都会让梦想更近一步。<br>愿你的行囊里装满勇气与智慧，眼里永远有星辰大海，脚下踏出属于自己的璀璨轨迹。<br>未来无论选择何方，愿你始终心怀热爱，在热爱的领域闪闪发光，活成自己最骄傲的模样！<br>
                 <h5>加油，高中生！</h5>
                 </p>
             </div>
             <div class="ui">
-                <h3>毕业留言板</h3>
-                <div><b for="nminput">姓名：</b><input type="text" id="nminput" placeholder="不填则匿名发送"></div>
-                <div><b for="msipt">留言内容：</b><textarea id="msipt" rows="5" placeholder="请输入留言内容"></textarea></div>
+                <h3>七夕表白墙</h3>
+                <div><b for="nminput">姓名：</b><input type="text" id="nminput" placeholder="不填则匿名"></div>
+                <div><b for="msipt">内容：</b><textarea id="msipt" rows="5" placeholder="请输入表白内容"></textarea></div>
                 <div><button id="sbtn">发送</button></div>
             </div>
             <div class="alst">
@@ -269,26 +272,25 @@
             const encodedMsg=encodeURIComponent(msg);
             let requestUrl;
             if(name){
-                requestUrl=`https://api.chuckfang.com/1314520/%e6%9d%a5%e8%87%aa${encodedName}%e7%9a%84%e6%af%95%e4%b8%9a%e7%95%99%e8%a8%80/${encodedMsg}`;
+                requestUrl=`https://api.chuckfang.com/1314520/%e6%9d%a5%e8%87%aa${encodedName}%e7%9a%84%e8%a1%a8%e7%99%bd/${encodedMsg}`;
             }else{
-                requestUrl=`https://api.chuckfang.com/1314520/%e5%8c%bf%e5%90%8d%e7%94%a8%e6%88%b7%e7%9a%84%e6%af%95%e4%b8%9a%e7%95%99%e8%a8%80/${encodedMsg}`;
+                requestUrl=`https://api.chuckfang.com/1314520/%e6%9d%a5%e8%87%aa%e5%8c%bf%e5%90%8d%e7%94%a8%e6%88%b7%e7%9a%84%e8%a1%a8%e7%99%bd/${encodedMsg}`;
             }
-            disableButton(10);
             fetch(requestUrl,{method:'GET'})
                 .then((response)=>{
                     const httpStatus=response.status;
                     if(httpStatus===200){
                         alert('发送成功');
+                        disableButton(60);
+                        msipt.value='';
                     }else if(httpStatus===403){
                         alert('无权限发送');
                     }else{
                         alert('发送失败，请稍后再试');
                     }
-                    msipt.value='';
                 })
                 .catch(()=>{
                     alert('发送失败，请稍后再试');
-                    msipt.value='';
                 });
         }
         function disableButton(seconds){
@@ -311,5 +313,4 @@
         }
     </script>
 </body>
-
 </html>
