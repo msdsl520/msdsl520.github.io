@@ -186,7 +186,10 @@
         <header>
             <div class="" style="text-align:center;">
                 <a type="button" onclick="hello()">
-                    <img class="imgui" width="184" height="184" src="/qixi.png" alt="个人头像">
+                    <picture>
+                        <source class="imgui" srcset="qixi.webp" type="image/webp">
+                        <img class="imgui" src="qixi.png" alt="七夕" width="184" height="184">
+                    </picture>
                 </a>
             </div>
         </header><br>
@@ -235,17 +238,22 @@
             </div>
             <div class="ui">
                 <h2>我的软件</h2>
-                <div class="pjcar"><a href="/soft/clock/" target="_blank" class="sfcar"><img src="/soft/clock/icon.png"alt="番茄时钟">
+                <div class="pjcar">
+                    <a href="/soft/clock/" target="_blank" class="sfcar">
+                        <img src="/soft/clock/icon.png"alt="番茄时钟" loading="lazy">
                         <div class="sfcct">
                             <div class="sfnam">番茄时钟</div>
                             <div class="sfdec">一个简约的番茄钟工具</div>
                         </div>
-                    </a><a href="/soft/mdtest/" target="_blank" class="sfcar"><img src="/soft/mdtest/icon-big.png" alt="运势测算">
+                    </a>
+                    <a href="/soft/mdtest/" target="_blank" class="sfcar">
+                        <img src="/soft/mdtest/icon-big.png" alt="运势测算" loading="lazy">
                         <div class="sfcct">
                             <div class="sfnam">运势测算</div>
                             <div class="sfdec">没什么用的数学……（毫无科学依据）</div>
                         </div>
-                    </a></div>
+                    </a>
+                </div>
                 <div class="sfdec">图标自己画的，不太好别介意(。・ω・。)</div>
             </div>
         </main>
