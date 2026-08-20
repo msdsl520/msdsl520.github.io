@@ -1,0 +1,63 @@
+<div class="ui">
+    <h3>七夕表白墙</h3>
+    <div><b for="nminput">姓名：</b><input type="text" id="nminput" placeholder="不填则匿名"></div>
+    <div><b for="msipt">内容：</b><textarea id="msipt" rows="5" placeholder="请输入表白内容"></textarea></div>
+    <div><button id="sbtn">发送</button></div>
+</div>
+        <script>
+    const nminput=document.getElementById('nminput');
+    const msipt=document.getElementById('msipt');
+    const sbtn=document.getElementById('sbtn');
+    let countdownTimer=null;
+    sbtn.addEventListener('click',handleSend);
+    function handleSend(){
+        const name=nminput.value.trim();
+        const msg=msipt.value.trim();
+        if(!msg){
+            alert('请输入留言内容');
+            return;
+        }
+        const encodedName=encodeURIComponent(name);
+        const encodedMsg=encodeURIComponent(msg);
+        let requestUrl;
+        if(name){
+            requestUrl=`https://api.chuckfang.com/1314520/%e6%9d%a5%e8%87%aa${encodedName}%e7%9a%84%e8%a1%a8%e7%99%bd/${encodedMsg}`;
+        }else{
+            requestUrl=`https://api.chuckfang.com/1314520/%e6%9d%a5%e8%87%aa%e5%8c%bf%e5%90%8d%e7%94%a8%e6%88%b7%e7%9a%84%e8%a1%a8%e7%99%bd/${encodedMsg}`;
+        }
+        fetch(requestUrl,{method:'GET'})
+            .then((response)=>{
+                const httpStatus=response.status;
+                if(httpStatus===200){
+                    alert('发送成功');
+                    disableButton(60);
+                    msipt.value='';
+                }else if(httpStatus===403){
+                    alert('无权限发送');
+                }else{
+                    alert('发送失败，请稍后再试');
+                }
+            })
+            .catch(()=>{
+                alert('发送失败，请稍后再试');
+            });
+    }
+    function disableButton(seconds){
+        if(countdownTimer){
+            clearInterval(countdownTimer);
+        }
+        sbtn.disabled=true;
+        let remaining=seconds;
+        sbtn.textContent=`${remaining}秒后可重发`;
+        countdownTimer=setInterval(()=>{
+            remaining--;
+            if(remaining<=0){
+                clearInterval(countdownTimer);
+                sbtn.disabled=false;
+                sbtn.textContent='发送';
+            }else{
+                sbtn.textContent=`${remaining}秒后可重发`;
+            }
+        },1000);
+    }
+</script>
