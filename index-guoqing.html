@@ -25,7 +25,7 @@
             line-height:1.6;
             margin:0;
             padding:20px;
-            background:#ebecef;
+            background:linear-gradient(180deg,#d8503e 0%,#ff6b6b 25%,#fff 60%,#fff 100%);
             color:#333
         }
         a{
@@ -178,38 +178,164 @@
             color:#666;
             line-height:1.5
         }
+        .star-float{
+            position:fixed;
+            font-size:20px;
+            color:#ffd700;
+            opacity:0.7;
+            pointer-events:none;
+            animation:star-float-up linear infinite;
+            z-index:9997
+        }
+        @keyframes star-float-up{
+            0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+            10%{opacity:0.8}
+            90%{opacity:0.8}
+            100%{transform:translateY(-50px) rotate(360deg);opacity:0}
+        }
+        .hero-card{
+            position:relative;
+            overflow:hidden
+        }
+        .hero-card::before{
+            content:"";
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            height:6px;
+            background:linear-gradient(90deg,#de2910 0%,#ff6b6b 50%,#de2910 100%)
+        }
+        .hero-card::after{
+            content:"★ ★ ★ ★ ★";
+            position:absolute;
+            bottom:10px;
+            right:20px;
+            color:#de2910;
+            font-size:14px;
+            letter-spacing:8px;
+            opacity:0.6
+        }
+        .firework{
+            position:fixed;
+            width:4px;
+            height:4px;
+            border-radius:50%;
+            pointer-events:none;
+            z-index:9996
+        }
+        .atclit{
+            position:relative;
+            padding-left:18px
+        }
+        .atclit::before{
+            content:"★";
+            position:absolute;
+            left:0;
+            top:50%;
+            transform:translateY(-50%);
+            color:#de2910;
+            font-size:12px
+        }
+        .nafoot{
+            text-align:center;
+            padding:30px 20px;
+            margin-top:30px;
+            color:#de2910;
+            font-size:14px;
+            background:#ebecef;
+            border-radius:20px;
+            box-shadow:inset 5px 5px 10px #d4d5d8,inset -5px -5px 10px #fff
+        }
+        .nafoot .flag{
+            font-size:24px;
+            margin:0 5px
+        }
     </style>
     <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","v60r6kypoj");</script>
 </head>
 <body>
+    <script>
+    (function(){
+        var emojis=['★','✦','✧','☆'];
+        var colors=['#ffd700','#ff4d4f','#ff6b6b','#ffa940','#ffc53d'];
+        setInterval(function(){
+            var s=document.createElement('div');
+            s.className='star-float';
+            s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+            s.style.color=colors[Math.floor(Math.random()*colors.length)];
+            s.style.left=Math.random()*100+'vw';
+            s.style.fontSize=(12+Math.random()*18)+'px';
+            var dur=6+Math.random()*8;
+            s.style.animationDuration=dur+'s';
+            document.body.appendChild(s);
+            setTimeout(function(){s.remove()},dur*1000);
+        },500);
+        setInterval(function(){
+            var fw=document.createElement('div');
+            fw.className='firework';
+            var x=10+Math.random()*80;
+            var y=10+Math.random()*60;
+            fw.style.left=x+'vw';
+            fw.style.top=y+'vh';
+            var hue=Math.floor(Math.random()*60);
+            fw.style.background='hsl('+hue+',100%,60%)';
+            document.body.appendChild(fw);
+            for(var i=0;i<12;i++){
+                var p=document.createElement('div');
+                p.className='firework';
+                var angle=(i*30)*Math.PI/180;
+                var dx=Math.cos(angle)*60;
+                var dy=Math.sin(angle)*60;
+                p.style.left=x+'vw';
+                p.style.top=y+'vh';
+                p.style.background=fw.style.background;
+                p.style.transition='all 0.8s ease-out';
+                document.body.appendChild(p);
+                (function(pp,dxx,dyy){
+                    setTimeout(function(){
+                        pp.style.transform='translate('+dxx+'px,'+dyy+'px)';
+                        pp.style.opacity='0';
+                    },30);
+                    setTimeout(function(){pp.remove()},900);
+                })(p,dx,dy);
+            }
+            fw.remove();
+        },4000);
+    })();
+    </script>
   <div class="ctir">
         <header>
             <div class="" style="text-align:center;">
                 <a type="button" onclick="hello()">
                     <picture>
-                        <source class="imgui" srcset="wushiba.webp" type="image/webp">
-                        <img class="imgui" src="wushiba.png" alt="开学" width="184" height="184">
+                        <source class="imgui" srcset="guoqing.webp" type="image/webp">
+                        <img class="imgui" src="guoqing.png" alt="guoqing" width="184" height="184">
                     </picture>
                 </a>
             </div>
         </header><br>
         <main class="mctnt">
-            <div class="ui">
-                <h2>个人介绍</h2>
-                <p>新高一学生，即将开学！<br>愿你带着初中的纯真与热忱，奔赴下一场山海。<br>前路或许有风雨，但请记得：每一次挑战都是成长的勋章，每一份坚持都会让梦想更近一步。<br>愿你的行囊里装满勇气与智慧，眼里永远有星辰大海，脚下踏出属于自己的璀璨轨迹。<br>未来无论选择何方，愿你始终心怀热爱，在热爱的领域闪闪发光，活成自己最骄傲的模样！<br>
-                <h5>加油，高中生！</h5>
-                </p>
+            <div class="ui hero-card">
+                <h2>国庆快乐</h2>
+                <p>金秋十月，硕果盈枝，神州大地同庆华诞。</p>
+                <p>七十五载风雨兼程，从山河破碎到盛世繁华，从筚路蓝缕到伟大复兴。每一座崛起的高楼、每一座贯通的山河、每一张幸福的笑脸，都是祖国母亲最动人的勋章。</p>
+                <p>看今日之中国——科技创新日夜奔涌，乡村振兴遍地开花，航天探宇深潜入海，一带一路连起四海同心。五星红旗迎风飘扬的地方，就有生生不息的中国力量。
+                <p>愿祖国山河无恙，繁荣昌盛；</p>
+                <p>愿人民岁月静好，幸福安康；</p>
+                <p>愿伟大的中华人民共和国，续写新时代的壮丽篇章！</p>
+                <p>盛世华章，与有荣焉。祝大家国庆快乐，祖国万岁！</p>
             </div>
             <div class="alst">
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                     <h2>我的文章</h2><a href="/article"
                         style="color:#808080;font-weight:bold;padding:5px 10px;">全部文章ヾ(•ω•`)o</a>
-                </div> <a class="atcl"
-                    href="https://blog.csdn.net/smpdx/article/details/163398886">验证码的发展历程：从验证人类到智能识别</a><a class="atcl"
-                    href="https://blog.csdn.net/smpdx/article/details/152565513">揭开网页加载背后的神秘面纱</a><a class="atcl"
-                    href="https://blog.csdn.net/smpdx/article/details/145531785">网络安全：数字世界的隐形铠甲</a><a class="atcl"
-                    href="https://blog.csdn.net/smpdx/article/details/145643160">加密算法：信息安全的基石</a><a class="atcl"
-                    href="https://blog.csdn.net/smpdx/article/details/147184655">数字证书：网络中的“身份证”</a><a class="atcl"
+                </div> <a class="atcl atclit"
+                    href="https://blog.csdn.net/smpdx/article/details/163398886">验证码的发展历程：从验证人类到智能识别</a><a class="atcl atclit"
+                    href="https://blog.csdn.net/smpdx/article/details/152565513">揭开网页加载背后的神秘面纱</a><a class="atcl atclit"
+                    href="https://blog.csdn.net/smpdx/article/details/145531785">网络安全：数字世界的隐形铠甲</a><a class="atcl atclit"
+                    href="https://blog.csdn.net/smpdx/article/details/145643160">加密算法：信息安全的基石</a><a class="atcl atclit"
+                    href="https://blog.csdn.net/smpdx/article/details/147184655">数字证书：网络中的“身份证”</a><a class="atcl atclit"
                     href="https://blog.csdn.net/smpdx/article/details/148047554">解锁HTML适配密码：让网页在不同设备自由“变身”</a>
             </div>
             <div class="ui">
@@ -218,15 +344,15 @@
                     <a href="/soft/clock/" target="_blank" class="sfcar">
                         <img src="/soft/clock/icon.png"alt="番茄时钟" loading="lazy">
                         <div class="sfcct">
-                            <div class="sfnam">番茄时钟</div>
-                            <div class="sfdec">一个简约的番茄钟工具</div>
+                        <div class="sfnam">番茄时钟</div>
+                        <div class="sfdec">一个简约的番茄钟工具</div>
                         </div>
                     </a>
                     <a href="/soft/mdtest/" target="_blank" class="sfcar">
                         <img src="/soft/mdtest/icon-big.png" alt="运势测算" loading="lazy">
                         <div class="sfcct">
-                            <div class="sfnam">运势测算</div>
-                            <div class="sfdec">没什么用的数学……（毫无科学依据）</div>
+                        <div class="sfnam">运势测算</div>
+                        <div class="sfdec">没什么用的数学……（毫无科学依据）</div>
                         </div>
                     </a>
                 </div>
@@ -235,6 +361,14 @@
         </main>
         <aside class="sbar"></aside>
     </div>
+    <footer class="nafoot">
+        <div>
+            <span class="flag">🇨🇳</span>
+            <span>热烈庆祝中华人民共和国成立76周年</span>
+            <span class="flag">🇨🇳</span>
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:#999;">山河无恙 · 国泰民安 · 盛世华章 · 与有荣焉</div>
+    </footer>
     <script
         type="text/javascript">var clicks=0;function hello(){clicks += 1;document.getElementById("clicks").innerHTML=clicks;if(clicks>=5) { alert("你发现了一个小彩蛋"); window.location.href = '/egg' } };
     </script>
