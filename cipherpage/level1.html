@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>cipherpage</title>
+<link rel="stylesheet" href="style.css">
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","v60r6kypoj");</script>
+</head>
+<body>
+<h2>第1页 · 档案开端</h2>
+<div class="box">
+<p>这是管理员留下的第一页记录。</p>
+<p>他说：秘密常常藏在页面本身，而不是可见的文字里。</p>
+<p>寻找答案，翻开下一页档案。</p>
+</div>
+<input id="ans" placeholder="输入答案">
+<button onclick="check()">提交</button>
+<button onclick="showHint()">提示</button>
+<div class="tip" id="hintBox"></div>
+<div class="msg" id="msg"></div>
+<div class="back">
+<button onclick="location.href='index.html'">返回首页</button>
+</div>
+<script>
+const levelNum = 1;
+const nextLevel = "level2.html";
+// 答案：dawn 反转存储 nwad
+const answerRev = "egaprehpic";
+const hintText = "网页的标题藏着秘密";
+let hintUsed = false;
+let unlock = localStorage.getItem('unlockLevel');
+if(Number(unlock) < levelNum){
+    alert("这份档案尚未解锁，无法访问！");
+    location.href = "index.html";
+}
+function check(){
+    let input = document.getElementById("ans").value.trim().toLowerCase();
+    let realAns = answerRev.split('').reverse().join('');
+    if(input === realAns){
+        document.getElementById("msg").innerText = "档案破译成功，解锁下一页...";
+        localStorage.setItem('unlockLevel', levelNum+1);
+        setTimeout(()=>location.href=nextLevel,1500);
+    }else{
+        document.getElementById("msg").innerText = "破译失败，再仔细寻找线索。";
+    }
+}
+function showHint(){
+    if(!hintUsed){
+        document.getElementById("hintBox").innerText = hintText;
+        document.getElementById("hintBox").style.display="block";
+        hintUsed=true;
+    }else{
+        alert("提示已用尽");
+    }
+}
+</script>
+</body>
+</html>

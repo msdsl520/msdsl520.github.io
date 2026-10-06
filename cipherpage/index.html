@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" oncontextmenu="self.event.returnValue=false" onselectstart="return false">
+<head>
+    <meta charset="UTF-8">
+    <title>CipherPage|密页档案</title>
+    <link rel="stylesheet" href="home.css">
+    <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","v60r6kypoj");</script>
+</head>
+<body>
+    <h1>CipherPage｜密页档案</h1>
+    <div class="box">
+        <p>这是一份被遗弃在网络深处的加密档案。</p>
+        <p>档案管理员消失已久，只留下层层上锁的页面。</p>
+        <p>破译每一页隐藏的线索，解锁档案碎片。</p>
+        <br>
+        <p>规则：</p>
+        <p>1. 不能直接跳转到未解锁的档案页面。</p>
+        <p>2. 每一关最多获取1次提示。</p>
+        <p>3. 答案不区分大小写。</p>
+    </div>
+    <div class="info" id="status"></div>
+    <div class="btns">
+        <button onclick="startGame()">开始调查</button>
+        <button onclick="resetSave()">重置档案</button>
+    </div>
+    <script>
+        // 读取存档
+        let unlock = localStorage.getItem('unlockLevel');
+        if (!unlock) {
+            localStorage.setItem('unlockLevel', 1);
+            unlock = 1;
+        }
+        document.getElementById('status').innerText = "当前已解锁：第" + unlock + "页档案";
+        function startGame() {
+            location.href = "level"+unlock+".html";
+        }
+        function resetSave() {
+            if (confirm("确定清除存档？所有解锁记录将会清空。")) {
+                if (confirm("再次确认清除？")) {
+                    localStorage.removeItem('unlockLevel');
+                    localStorage.setItem('unlockLevel', 1);
+                    location.reload();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

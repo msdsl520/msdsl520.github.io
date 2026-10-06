@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>档案-09</title>
+<link rel="stylesheet" href="style.css">
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","v60r6kypoj");</script>
+</head>
+<body>
+<h2>第9页 · 碎片汇总【主线终章】</h2>
+<div class="box">
+<p>前面四页档案，各留下一个关键词。</p>
+<p>把他们拼接在一起，就是这一页的答案。</p>
+<br>
+<p>【隐藏结局】这一页还存在另一个密钥，可以通往管理员隐藏的私人记录。</p>
+</div>
+<input id="ans" placeholder="输入答案">
+<button onclick="check()">提交</button>
+<button onclick="showHint()">提示</button>
+<div class="tip" id="hintBox"></div>
+<div class="msg" id="msg"></div>
+<div class="back">
+<button onclick="location.href='index.html'">返回首页</button>
+</div>
+<script>
+const levelNum = 9;
+const guardNum = 8;
+const mainNext = "end.html";
+const secretNext = "secret.html";
+// 主线答案：cwcr
+const mainAnsRev = "rcwc";
+// 彩蛋答案 msdsl520
+const secretAnsRev = "025lsdsm";
+const hintText = "1~4页的答案首字母";
+let hintUsed = false;
+let unlock = localStorage.getItem('unlockLevel');
+if(Number(unlock) < guardNum){
+    alert("这份档案尚未解锁，无法访问！");
+    location.href = "index.html";
+}
+function check(){
+    let input = document.getElementById("ans").value.trim().toLowerCase();
+    let mainAns = mainAnsRev.split('').reverse().join('');
+    let secretAns = secretAnsRev.split('').reverse().join('');
+    if(input === mainAns){
+        document.getElementById("msg").innerText = "主线档案破译完成！";
+        localStorage.setItem('unlockLevel', levelNum);
+        setTimeout(()=>location.href=mainNext,1500);
+    }else if(input === secretAns){
+        document.getElementById("msg").innerText = "发现秘密分支，正在加载私人档案...";
+        localStorage.setItem('unlockLevel', levelNum);
+        setTimeout(()=>location.href=secretNext,1500);
+    }else{
+        document.getElementById("msg").innerText = "破译失败，再仔细寻找线索。";
+    }
+}
+function showHint(){
+    if(!hintUsed){
+        document.getElementById("hintBox").innerText = hintText;
+        document.getElementById("hintBox").style.display="block";
+        hintUsed=true;
+    }else{
+        alert("提示已用尽");
+    }
+}
+</script>
+</body>
+</html>
